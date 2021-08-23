@@ -1,53 +1,66 @@
-import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
-
-class LandingPage extends StatelessWidget {
-  const LandingPage({ Key? key }) : super(key: key);
-
+ 
+ // application entry
+ 
+class test1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-				  child: Scaffold(
-					  backgroundColor: Colors.redAccent[400],
-					  body: Center(
-					    child: Column(
-							mainAxisAlignment: MainAxisAlignment.spaceBetween,
-						  children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 40.0, 0, 0),
-                    child: Text(
-                    'EMERGENCY',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 40.0,
-                    //   fontWeight: FontWeight.bold,
-                    )
-                  ),
-                  ),
-							    //   SizedBox(height: 40.0),
-                  Container(
-                                  height: 460.0,
-                                  width: 460.0,
-                    child: FittedBox(
-                                      child: AvatarGlow(
-                                        endRadius: 60.0,
-                                        child: FloatingActionButton(
-                                        onPressed: () {},
-                                        child: Text(
-                                            'HELP!',
-                                            style: TextStyle(
-                                                color: Colors.red[400]
-                                            ),
-                                        ),
-                                        backgroundColor: Colors.white,
-                                          ),
-                                      ),
-                                  ),
-                  )
-						  ],
-					    ),
-					  )
-				  ),
-				);
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+                 // blue theme 
+        primarySwatch: Colors.blue,
+      ),
+             // Apply home route
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+ 
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key? key, required this.title}) : super(key: key);
+  
+  final String title;
+  
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+ 
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+ 
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+ 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ),
+    );
   }
 }
