@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:safety_pin/pages/detail.dart';
+// ignore: unused_import
 import 'package:safety_pin/pages/home.dart';
+import 'package:safety_pin/pages/landingpage.dart';
 void main() {
 	runApp(MaterialApp(
 		home: Scroller()
@@ -21,7 +22,7 @@ class Scroller extends StatelessWidget {
                     child: LandingPage()
                 ),
                 Center(
-                    child: test1()
+                    child: Test1()
                 )
             ],
         );
