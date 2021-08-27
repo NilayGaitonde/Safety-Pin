@@ -6,6 +6,8 @@
    <application
         android:label="safety_pin"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAUYoBc1hqLLL5WuPxA1Q23NyP9iKcrjRw"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
