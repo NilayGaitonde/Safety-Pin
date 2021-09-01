@@ -34,6 +34,7 @@ dependencies:
   telephony: ^0.1.4
   flutter_sms: ^2.3.1
   geolocator: ^7.4.0
+  google_maps_flutter: ^2.0.6
 
 dev_dependencies:
   flutter_test:
