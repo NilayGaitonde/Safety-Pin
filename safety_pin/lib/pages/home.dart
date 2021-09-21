@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MyApp extends StatefulWidget {
+class GMap extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _GMapState createState() => _GMapState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _GMapState extends State<GMap> {
   late GoogleMapController mapController;
 
   final LatLng _center = const LatLng(19.1266443, 72.8434408);

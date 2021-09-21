@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:safety_pin/pages/bothpages.dart';
+import 'package:safety_pin/pages/categories/adult.dart';
 import 'package:safety_pin/pages/categories/parentchild/child/childgame.dart';
 import 'package:safety_pin/pages/categories/parentchild/parentsetup.dart';
-// ignore: unused_import
-import 'package:safety_pin/pages/home.dart';
 import 'package:safety_pin/pages/login.dart';
 import 'package:safety_pin/services/store.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await UserSimplePreferences.init();
+  await SharedPreferences.getInstance();
   runApp(MaterialApp(
     routes: {
       '/BothPages': (context) => BothPages(),
       '/Games': (context) => Game(),
-      '/Parent': (context) => SetUp()
+      '/Parent': (context) => SetUp(),
+      '/adult': (context) => Adult(),
     },
     home: CheckPage(),
     debugShowCheckedModeBanner: false,
