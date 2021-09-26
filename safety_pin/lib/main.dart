@@ -4,6 +4,7 @@ import 'package:safety_pin/pages/categories/adult.dart';
 import 'package:safety_pin/pages/categories/parentchild/child/childgame.dart';
 import 'package:safety_pin/pages/categories/parentchild/parentsetup.dart';
 import 'package:safety_pin/pages/login.dart';
+import 'package:safety_pin/pages/Welcome.dart';
 import 'package:safety_pin/services/store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,6 +13,7 @@ Future<void> main() async {
   await UserSimplePreferences.init();
   await SharedPreferences.getInstance();
   runApp(MaterialApp(
+    
     routes: {
       '/BothPages': (context) => BothPages(),
       '/Games': (context) => Game(),
@@ -32,7 +34,8 @@ class CheckPage extends StatelessWidget {
       print(UserSimplePreferences.getCategory());
       return BothPages();
     } else {
-      return LoginForm();
+      return WelcomeFrame();
+      // return LoginForm();
     }
   }
 }
