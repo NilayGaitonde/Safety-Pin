@@ -21,132 +21,130 @@ class _LoginFormState extends State<LoginForm> {
           title: Text('Login Page'),
           centerTitle: true,
         ),
-        body: Center(
-          child: SingleChildScrollView(
-            reverse: true,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    // width: 350,
-                    // padding: EdgeInsets.symmetric(
-                    //   horizontal: 0,
-                    // ),
-                    child: Stack(
-                      children: <Widget>[
-                        Container(
-                            padding: EdgeInsets.fromLTRB(30.0, 0.0, 0.0, 0.0),
-                            child: Text('Hello',
-                                style: TextStyle(
-                                    fontSize: 80,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey[800]))),
-                        Container(
-                            padding: EdgeInsets.fromLTRB(30.0, 80.0, 0.0, 0.0),
-                            child: Text('There',
-                                style: TextStyle(
-                                    fontSize: 80,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.grey[800]))),
-                        Container(
-                            padding: EdgeInsets.fromLTRB(240.0, 80.0, 0.0, 0.0),
-                            child: Text('.',
-                                style: TextStyle(
-                                    fontSize: 80,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.pink))),
-                      ],
-                    ),
+        body: SingleChildScrollView(
+          reverse: true,
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  // width: 350,
+                  // padding: EdgeInsets.symmetric(
+                  //   horizontal: 0,
+                  // ),
+                  child: Stack(
+                    children: <Widget>[
+                      Container(
+                          padding: EdgeInsets.fromLTRB(30.0, 30.0, 0.0, 0.0),
+                          child: Text('Hello',
+                              style: TextStyle(
+                                  fontSize: 80,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[800]))),
+                      Container(
+                          padding: EdgeInsets.fromLTRB(30.0, 110.0, 0.0, 0.0),
+                          child: Text('There',
+                              style: TextStyle(
+                                  fontSize: 80,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[800]))),
+                      Container(
+                          padding: EdgeInsets.fromLTRB(252.0, 110.0, 0.0, 0.0),
+                          child: Text('.',
+                              style: TextStyle(
+                                  fontSize: 80,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.pink))),
+                    ],
                   ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: 30.0,
-                      left: 30,
-                      right: 30,
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                    top: 80.0,
+                    left: 30,
+                    right: 30,
+                  ),
+                  child: Column(children: <Widget>[
+                    TextField(
+                      decoration: InputDecoration(
+                          labelText: 'EMAIL',
+                          labelStyle: TextStyle(
+                            color: Colors.grey,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.pink))),
                     ),
-                    child: Column(children: <Widget>[
-                      TextField(
-                        decoration: InputDecoration(
-                            labelText: 'EMAIL',
-                            labelStyle: TextStyle(
-                              color: Colors.grey,
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.pink))),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                          labelText: 'PASSWORD',
+                          labelStyle: TextStyle(
+                            color: Colors.grey,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.pink))),
+                      obscureText: true,
+                      // maxLength: 10,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    DropdownButtonFormField<String>(
+                      value: value,
+                      iconSize: 36,
+                      isExpanded: true,
+                      elevation: 5,
+                      icon: Icon(Icons.arrow_drop_down, color: Colors.pink),
+                      items: items.map(buildMenuItem).toList(),
+                      onChanged: (value) => setState(() {
+                        this.value = value!;
+                      }),
+                    ),
+                    SizedBox(
+                      height: 60,
+                    ),
+                    TextButton(
+                      child: Text(
+                        'LOGIN',
+                        style: TextStyle(fontSize: 18),
                       ),
-                      SizedBox(
-                        height: 20,
+                      style: TextButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 130),
+                        backgroundColor: Colors.pink,
+                        primary: Colors.white,
                       ),
-                      TextField(
-                        decoration: InputDecoration(
-                            labelText: 'PASSWORD',
-                            labelStyle: TextStyle(
-                              color: Colors.grey,
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.pink))),
-                        obscureText: true,
-                        // maxLength: 10,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      DropdownButtonFormField<String>(
-                        value: value,
-                        iconSize: 36,
-                        isExpanded: true,
-                        elevation: 5,
-                        icon: Icon(Icons.arrow_drop_down, color: Colors.pink),
-                        items: items.map(buildMenuItem).toList(),
-                        onChanged: (value) => setState(() {
-                          this.value = value!;
-                        }),
-                      ),
-                      SizedBox(
-                        height: 60,
-                      ),
-                      TextButton(
-                        child: Text(
-                          'LOGIN',
-                          // style: TextStyle(fontSize: 20),
-                        ),
-                        style: TextButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 150),
-                          backgroundColor: Colors.pink,
-                          primary: Colors.white,
-                        ),
-                        onPressed: () async {
-                          UserSimplePreferences.setCategory(this.value);
-                          UserSimplePreferences.setLoggedIn(true);
-                          print(UserSimplePreferences.getCategory());
-                          Navigator.of(context)
-                              .pushReplacementNamed('/BothPages');
-                        },
-                      )
-                      // Container(
-                      //   height: 55,
-                      //   child: Material(
-                      //       borderRadius: BorderRadius.circular(30),
-                      //       shadowColor: Colors.pinkAccent,
-                      //       color: Colors.pink,
-                      //       elevation: 7.0,
-                      //       child: GestureDetector(
-                      //         onTap: () {},
-                      //         child: Center(
-                      //           child: Text(
-                      //             'LOGIN',
-                      //             style: TextStyle(color: Colors.white),
-                      //           ),
-                      //         ),
-                      //       )),
-                      // )
-                    ]),
-                  )
-                ]),
-          ),
+                      onPressed: () async {
+                        UserSimplePreferences.setCategory(this.value);
+                        UserSimplePreferences.setLoggedIn(true);
+                        print(UserSimplePreferences.getCategory());
+                        Navigator.of(context)
+                            .pushReplacementNamed('/BothPages');
+                      },
+                    )
+                    // Container(
+                    //   height: 55,
+                    //   child: Material(
+                    //       borderRadius: BorderRadius.circular(30),
+                    //       shadowColor: Colors.pinkAccent,
+                    //       color: Colors.pink,
+                    //       elevation: 7.0,
+                    //       child: GestureDetector(
+                    //         onTap: () {},
+                    //         child: Center(
+                    //           child: Text(
+                    //             'LOGIN',
+                    //             style: TextStyle(color: Colors.white),
+                    //           ),
+                    //         ),
+                    //       )),
+                    // )
+                  ]),
+                )
+              ]),
         ));
   }
 
