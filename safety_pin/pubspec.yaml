@@ -36,10 +36,20 @@ dependencies:
   geolocator: ^7.4.0
   google_maps_flutter: ^2.0.6
   shared_preferences: ^2.0.8
+  device_preview: ^0.7.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.9.2"
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon2.png"
+  adaptive_icon_foreground: "assets/ass.png"
+  adaptive_icon_background: "#57AEAF"
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
