@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:safety_pin/helpers/dialogHelper.dart';
-import 'package:safety_pin/services/editcontacts.dart';
+import 'package:safety_pin/pages/Welcome.dart';
 import 'package:safety_pin/services/store.dart';
 
 class Adult extends StatelessWidget {
@@ -11,6 +11,7 @@ class Adult extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.pink,
         title: Text('ADULT'),
         centerTitle: true,
       ),
@@ -42,8 +43,7 @@ class Adult extends StatelessWidget {
           ListTile(
             title: const Text(
               'Edit Contacts List',
-              style:
-                  TextStyle(fontSize: 15, decoration: TextDecoration.underline),
+              style: TextStyle(fontSize: 15),
             ),
             onTap: () {
               print('Hello world tap');
@@ -59,7 +59,9 @@ class Adult extends StatelessWidget {
           Container(
             child: ElevatedButton(
               onPressed: () {
-                UserSimplePreferences.setCategory('Null');
+                UserSimplePreferences.setLoggedIn(false);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => WelcomeFrame()));
               },
               child: Text('Log Out'),
             ),

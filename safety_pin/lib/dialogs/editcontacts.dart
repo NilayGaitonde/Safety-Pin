@@ -24,9 +24,7 @@ class _EditContactsState extends State<EditContacts> {
 
   _buildChild(BuildContext context) {
     List<String>? numbers = ['0', '1', '2'];
-    if (UserSimplePreferences.getContacts() != null) {
-      List? numbers = UserSimplePreferences.getContacts();
-    }
+    if (UserSimplePreferences.getContacts() != null) {}
     print(numbers);
     // text
     print('Hello world dialog box');

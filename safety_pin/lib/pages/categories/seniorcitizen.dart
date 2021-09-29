@@ -7,6 +7,7 @@ class SeniorCitizen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.pink,
         title: Text('SENIOR CITIZEN'),
       ),
     );

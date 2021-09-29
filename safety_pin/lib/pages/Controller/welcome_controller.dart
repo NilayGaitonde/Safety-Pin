@@ -1,8 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:safety_pin/pages/categories/adult.dart';
-import 'package:safety_pin/pages/categories/parentchild/parent.dart';
-import 'package:safety_pin/pages/categories/seniorcitizen.dart';
 import 'package:safety_pin/pages/model/info.dart';
 import 'package:get/state_manager.dart';
 import 'package:get/utils.dart';

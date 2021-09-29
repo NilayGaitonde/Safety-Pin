@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:safety_pin/services/editcontacts.dart';
+import 'package:safety_pin/dialogs/editcontacts.dart';
 
 class DialogHelper {
   static contactedit(context) =>

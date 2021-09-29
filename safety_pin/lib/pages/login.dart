@@ -121,8 +121,7 @@ class _LoginFormState extends State<LoginForm> {
                         UserSimplePreferences.setCategory(this.value);
                         UserSimplePreferences.setLoggedIn(true);
                         print(UserSimplePreferences.getCategory());
-                        Navigator.of(context)
-                            .pushReplacementNamed('/BothPages');
+                        Navigator.of(context).pushReplacementNamed('/setup');
                       },
                     )
                     // Container(

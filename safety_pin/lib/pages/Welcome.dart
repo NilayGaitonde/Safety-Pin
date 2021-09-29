@@ -1,4 +1,3 @@
-import 'package:color/color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:safety_pin/pages/Controller/welcome_controller.dart';
@@ -9,9 +8,7 @@ class WelcomeFrame extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var blue;
     return Scaffold(
-      
       body: SafeArea(
         child: Stack(
           children: [

@@ -1,15 +1,14 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:safety_pin/pages/Welcome.dart';
 import 'package:safety_pin/pages/bothpages.dart';
 import 'package:safety_pin/pages/categories/adult.dart';
 import 'package:safety_pin/pages/categories/parentchild/child/childgame.dart';
 import 'package:safety_pin/pages/categories/parentchild/parentsetup.dart';
-import 'package:safety_pin/pages/login.dart';
-import 'package:safety_pin/pages/Welcome.dart';
+import 'package:safety_pin/pages/setup.dart';
 import 'package:safety_pin/services/store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:device_preview/device_preview.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +30,7 @@ Future<void> main() async {
         '/Games': (context) => Game(),
         '/Parent': (context) => SetUp(),
         '/adult': (context) => Adult(),
+        '/setup': (context) => SetupForm(),
       },
       home: CheckPage(),
       debugShowCheckedModeBanner: false,
@@ -43,12 +43,13 @@ class CheckPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserSimplePreferences.initialMessage();
     if (UserSimplePreferences.loggedin() == true) {
       print(UserSimplePreferences.getCategory());
       return BothPages();
     } else {
       return WelcomeFrame();
-      // return LoginForm();
     }
+    // return SetupForm();
   }
 }
