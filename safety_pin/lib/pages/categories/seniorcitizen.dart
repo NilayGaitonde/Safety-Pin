@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:safety_pin/pages/home.dart';
 
 class SeniorCitizen extends StatelessWidget {
   const SeniorCitizen({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class SeniorCitizen extends StatelessWidget {
         backgroundColor: Colors.pink,
         title: Text('SENIOR CITIZEN'),
       ),
+      body: GMap(),
     );
   }
 }

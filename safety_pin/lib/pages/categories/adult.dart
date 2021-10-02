@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:safety_pin/helpers/dialogHelper.dart';
 import 'package:safety_pin/pages/Welcome.dart';
+import 'package:safety_pin/pages/home.dart';
 import 'package:safety_pin/services/store.dart';
 
 class Adult extends StatelessWidget {
@@ -15,6 +16,7 @@ class Adult extends StatelessWidget {
         title: Text('ADULT'),
         centerTitle: true,
       ),
+      body: GMap(),
       drawer: Drawer(
           child: ListView(
         // padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
@@ -38,7 +40,7 @@ class Adult extends StatelessWidget {
                     ),
                   ],
                 ),
-                decoration: BoxDecoration(color: Colors.blue),
+                decoration: BoxDecoration(color: Colors.pink),
               )),
           ListTile(
             title: const Text(
@@ -63,6 +65,9 @@ class Adult extends StatelessWidget {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => WelcomeFrame()));
               },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.pink, // background
+              ),
               child: Text('Log Out'),
             ),
           ),
