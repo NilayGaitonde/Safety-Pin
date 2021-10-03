@@ -37,6 +37,10 @@ dependencies:
   google_maps_flutter: ^2.0.6
   shared_preferences: ^2.0.8
   device_preview: ^0.7.4
+  image_picker: ^0.8.4+2
+  cloud_firestore: ^2.5.3
+  cloud_functions: ^3.0.4
+  device_info: ^2.0.2
 
 dev_dependencies:
   flutter_test:

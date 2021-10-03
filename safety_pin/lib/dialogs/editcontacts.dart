@@ -34,6 +34,9 @@ class _EditContactsState extends State<EditContacts> {
       decoration: BoxDecoration(color: Colors.white),
       child: Column(
         children: [
+          SizedBox(
+            height: 20,
+          ),
           Text(
             'Current contacts',
             style: TextStyle(

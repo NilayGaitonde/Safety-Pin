@@ -1,11 +1,25 @@
+import 'dart:io';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:device_info/device_info.dart';
 
 class UserSimplePreferences {
   static SharedPreferences _preferences = "" as SharedPreferences;
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
+
+  static Future<String> getID() async {
+    var deviceInfo = DeviceInfoPlugin();
+    if (Platform.isIOS) {
+      var iosDeviceInfo = await deviceInfo.iosInfo;
+      return iosDeviceInfo.identifierForVendor; // unique ID on iOS
+    } else {
+      var androidDeviceInfo = await deviceInfo.androidInfo;
+      return androidDeviceInfo.androidId; // unique ID on Android
+    }
+  }
 
   static Future setLoggedIn(bool loggedIn) async =>
       await _preferences.setBool('Acc', loggedIn);

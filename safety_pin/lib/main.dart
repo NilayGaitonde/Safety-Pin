@@ -9,10 +9,12 @@ import 'package:safety_pin/pages/categories/parentchild/parentsetup.dart';
 import 'package:safety_pin/pages/setup.dart';
 import 'package:safety_pin/services/store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'helpers/firebaseHelper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await UserSimplePreferences.init();
+  await Device.init();
   await SharedPreferences.getInstance();
   runApp(
     // DevicePreview(
@@ -20,6 +22,7 @@ Future<void> main() async {
     // builder: (context) =>
     MaterialApp(
       theme: ThemeData(
+          primaryColor: Colors.blue.shade300,
           visualDensity: Platform.isLinux
               ? VisualDensity.comfortable
               : VisualDensity.compact),
@@ -43,6 +46,7 @@ class CheckPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(Device.deviceId);
     UserSimplePreferences.initialMessage();
     if (UserSimplePreferences.loggedin() == true) {
       print(UserSimplePreferences.getCategory());

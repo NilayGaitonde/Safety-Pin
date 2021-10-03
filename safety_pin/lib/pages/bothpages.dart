@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safety_pin/pages/categories/adult.dart';
-import 'package:safety_pin/pages/categories/seniorcitizen.dart';
+import 'package:safety_pin/pages/categories/seniorcitizen/seniorcitizen.dart';
 import 'package:safety_pin/pages/home.dart';
 import 'package:safety_pin/pages/landingpage.dart';
 import 'package:safety_pin/services/store.dart';
