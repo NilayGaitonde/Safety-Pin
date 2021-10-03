@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:safety_pin/helpers/dialogHelper.dart';
+import 'package:safety_pin/helpers/firebaseHelper.dart';
 
 class Medicine extends StatefulWidget {
   const Medicine({Key? key}) : super(key: key);
@@ -9,15 +11,14 @@ class Medicine extends StatefulWidget {
 }
 
 class _MedicineState extends State<Medicine> {
+  // Stream<QuerySnapshot> read = Database.readItems();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Your medicines"),
       ),
-      body: Column(
-        children: [],
-      ),
+      body: medicineList(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
@@ -25,5 +26,53 @@ class _MedicineState extends State<Medicine> {
         },
       ),
     );
+  }
+
+  Widget medicineList(BuildContext context) {
+    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+        stream: Database.readItems(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          } else if (snapshot.hasData || snapshot.data != null) {
+            return ListView.separated(
+                separatorBuilder: (context, index) => SizedBox(
+                      height: 16.0,
+                    ),
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  var noteInfo = snapshot.data!.docs[index].data();
+                  print('Title:$noteInfo');
+                  String title = noteInfo['medicine'];
+                  String date = noteInfo['date'];
+
+                  return Ink(
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: ListTile(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      title: Text(
+                        title,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      subtitle: Text(
+                        date,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  );
+                });
+          }
+          return Center(
+              child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
+          ));
+        });
   }
 }

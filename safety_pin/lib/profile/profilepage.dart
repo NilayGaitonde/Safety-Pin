@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:safety_pin/pages/model/user.dart';
 import 'package:safety_pin/profile/editprofilepage.dart';
 import 'package:safety_pin/profile/userpreferences.dart';

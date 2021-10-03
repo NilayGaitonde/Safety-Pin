@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:safety_pin/services/store.dart';
 
@@ -12,12 +10,13 @@ class Device {
 }
 
 class Database {
-  static String? userUid;
+  static String? userUid = Device.deviceId;
 
   static Future<void> addItem({
     required String name,
     required String date,
   }) async {
+    print(userUid);
     DocumentReference documentReference =
         _mainCollection.doc(userUid).collection('items').doc();
 
@@ -32,8 +31,9 @@ class Database {
         .catchError((e) => print(e));
   }
 
-  static Stream<QuerySnapshot> readItems() {
-    CollectionReference notesItemCollection =
+  static Stream<QuerySnapshot<Map<String, dynamic>>> readItems() {
+    print('Read items');
+    CollectionReference<Map<String, dynamic>> notesItemCollection =
         _mainCollection.doc(userUid).collection('items');
 
     return notesItemCollection.snapshots();

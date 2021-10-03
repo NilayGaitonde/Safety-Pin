@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:safety_pin/helpers/firebaseHelper.dart';
 
 class AddMedicine extends StatefulWidget {
   const AddMedicine({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _AddMedicineState extends State<AddMedicine> {
   }
 
   _buildChild(BuildContext context) {
-    print('Adding medicine');
+    print('Adding medicine dialog');
     return Container(
       height: 372,
       width: MediaQuery.of(context).size.width,
@@ -85,7 +86,18 @@ class _AddMedicineState extends State<AddMedicine> {
                   '${_dateTime.day.toString()}/${_dateTime.month.toString()}/${_dateTime.year.toString()}')
             ],
           ),
-          ElevatedButton(onPressed: () {}, child: Text('Add Medicine')),
+          Row(
+            children: [
+              ElevatedButton(
+                  onPressed: () {
+                    print(_medicine.text);
+                    print(_dateTime);
+                    Database.addItem(
+                        name: _medicine.text, date: _dateTime.toString());
+                  },
+                  child: Text('Add Medicine')),
+            ],
+          ),
         ],
       ),
     );

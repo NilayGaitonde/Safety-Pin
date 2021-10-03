@@ -10,9 +10,11 @@ import 'package:safety_pin/pages/setup.dart';
 import 'package:safety_pin/services/store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'helpers/firebaseHelper.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await UserSimplePreferences.init();
   await Device.init();
   await SharedPreferences.getInstance();
