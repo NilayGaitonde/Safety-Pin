@@ -67,14 +67,15 @@ class _ProfilePageState extends State<ProfilePage> {
       );
   Widget numberTemplate(number) {
     return Card(
-      color: Colors.blue,
+      color: Colors.pink,
       margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+      shape: StadiumBorder(),
       child: Padding(
         // padding: const EdgeInsets.all(20.0),
         padding: const EdgeInsets.fromLTRB(100.0, 20.0, 100.0, 20.0),
         child: Text(
           number,
-          style: TextStyle(fontSize: 28.0, color: Colors.black),
+          style: TextStyle(fontSize: 28.0, color: Colors.white),
         ),
       ),
     );
