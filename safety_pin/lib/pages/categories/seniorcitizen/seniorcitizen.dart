@@ -13,7 +13,10 @@ class SeniorCitizen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pink,
-        title: Text('SENIOR CITIZEN'),
+        title: Align(
+            alignment: Alignment(-0.3, 0.0),
+            child:
+                Text('SENIOR CITIZEN', style: TextStyle(color: Colors.white))),
       ),
       body: GMap(),
       drawer: Drawer(
@@ -26,45 +29,79 @@ class SeniorCitizen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'You have logged in as an',
-                        style: TextStyle(
-                          fontSize: 18,
+                      Center(
+                        child: Text(
+                          'You have logged in as an',
+                          style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
-                      Text(
-                        '${UserSimplePreferences.getCategory()}',
-                        style: TextStyle(fontSize: 25),
+                      Center(
+                        child: Text(
+                          '${UserSimplePreferences.getCategory()}',
+                          style: TextStyle(fontSize: 25, color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
                   decoration: BoxDecoration(color: Colors.pink),
                 )),
-            ListTile(
-              title: const Text(
-                'Edit Contacts List',
-                style: TextStyle(fontSize: 15),
+            Container(
+              padding: EdgeInsets.all(10),
+              child: ListTile(
+                trailing: Icon(
+                  Icons.contacts,
+                  color: Colors.pink,
+                  size: 30.0,
+                ),
+                title: Center(
+                  child: const Text(
+                    'Edit Contacts List',
+                    style: TextStyle(fontSize: 20, color: Colors.blueGrey),
+                  ),
+                ),
+                onTap: () {
+                  print('Hello world tap');
+                  DialogHelper.contactedit(context);
+                },
               ),
-              onTap: () {
-                print('Hello world tap');
-                DialogHelper.contactedit(context);
-              },
             ),
-            ListTile(
-              title: const Text('Your contact details'),
-              onTap: () {
-                print('Contact Details');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfilePage()));
-              },
+            Container(
+              padding: EdgeInsets.all(10),
+              child: ListTile(
+                trailing: Icon(
+                  Icons.login,
+                  color: Colors.pink,
+                  size: 30.0,
+                ),
+                title: Center(
+                  child: const Text('Your contact details',
+                      style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
+                ),
+                onTap: () {
+                  print('Contact Details');
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()));
+                },
+              ),
             ),
-            ListTile(
-              title: const Text('Medication'),
-              onTap: () {
-                print('Contact Details');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Medicine()));
-              },
+            Container(
+              padding: EdgeInsets.all(10),
+              child: ListTile(
+                trailing: Icon(
+                  Icons.medical_services,
+                  color: Colors.pink,
+                  size: 30.0,
+                ),
+                title: Center(
+                  child: const Text('Medication',
+                      style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
+                ),
+                onTap: () {
+                  print('Contact Details');
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Medicine()));
+                },
+              ),
             )
           ],
         ),

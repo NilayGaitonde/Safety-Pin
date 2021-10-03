@@ -22,7 +22,7 @@ Future<void> main() async {
     // builder: (context) =>
     MaterialApp(
       theme: ThemeData(
-          primaryColor: Colors.blue.shade300,
+          primaryColor: Colors.pink,
           visualDensity: Platform.isLinux
               ? VisualDensity.comfortable
               : VisualDensity.compact),
