@@ -1,0 +1,1 @@
+{"definitions": {"Is.Continent": {"value": ["==", ["get", "kind"], "continent"]}, "Is.Island": {"value": ["==", ["get", "kind"], "island"]}, "Is.Earth": {"value": ["==", ["get", "$layer"], "earth"]}, "Is.MountainRange": {"value": ["==", ["get", "kind"], "ridge"]}}}
