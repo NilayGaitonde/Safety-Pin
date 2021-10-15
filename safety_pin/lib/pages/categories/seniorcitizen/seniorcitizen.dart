@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:safety_pin/helpers/dialogHelper.dart';
+import 'package:safety_pin/pages/Welcome.dart';
 import 'package:safety_pin/pages/categories/seniorcitizen/medicine/medicine.dart';
 import 'package:safety_pin/pages/home.dart';
-import 'package:safety_pin/profile/profilepage.dart';
+import 'package:safety_pin/pages/profilepage.dart';
+// import 'package:safety_pin/profile/profilepage.dart';
 import 'package:safety_pin/services/store.dart';
 
 class SeniorCitizen extends StatelessWidget {
@@ -18,7 +20,7 @@ class SeniorCitizen extends StatelessWidget {
             child:
                 Text('SENIOR CITIZEN', style: TextStyle(color: Colors.white))),
       ),
-      body: GMap(),
+      body: MyApp(),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -31,13 +33,13 @@ class SeniorCitizen extends StatelessWidget {
                     children: [
                       Center(
                         child: Text(
-                          'You have logged in as an',
+                          'Hello,',
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ),
                       Center(
                         child: Text(
-                          '${UserSimplePreferences.getCategory()}',
+                          '${UserSimplePreferences.getName()}',
                           style: TextStyle(fontSize: 25, color: Colors.white),
                         ),
                       ),
@@ -102,7 +104,20 @@ class SeniorCitizen extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => Medicine()));
                 },
               ),
-            )
+            ),
+            Container(
+              child: ElevatedButton(
+                onPressed: () {
+                  UserSimplePreferences.setLoggedIn(false);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => WelcomeFrame()));
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.pink, // background
+                ),
+                child: Text('Log Out'),
+              ),
+            ),
           ],
         ),
       ),

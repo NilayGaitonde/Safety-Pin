@@ -21,7 +21,7 @@ class _ParentState extends State<Parent> {
           child: Column(
             children: [
               Text(
-                'Are you a parent or are you setting this phone for your child? $_age',
+                'Are you a parent or are you setting this phone for your child?',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 15),
               ),

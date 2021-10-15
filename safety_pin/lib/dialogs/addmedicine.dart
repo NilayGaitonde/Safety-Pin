@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safety_pin/helpers/firebaseHelper.dart';
+import 'package:safety_pin/pages/categories/seniorcitizen/medicine/medicine.dart';
 
 class AddMedicine extends StatefulWidget {
   const AddMedicine({Key? key}) : super(key: key);
@@ -10,8 +11,7 @@ class AddMedicine extends StatefulWidget {
 
 class _AddMedicineState extends State<AddMedicine> {
   final TextEditingController _medicine = TextEditingController();
-  late DateTime _dateTime = DateTime.now();
-
+  TimeOfDay _time = TimeOfDay(hour: 9, minute: 10);
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -60,43 +60,43 @@ class _AddMedicineState extends State<AddMedicine> {
           ),
           Column(
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(DateTime.now().year),
-                    lastDate: DateTime(DateTime.now().year + 1),
-                  ).then((value) {
-                    setState(() {
-                      _dateTime = value!;
-                    });
-                  });
-                },
-                child: Text(
-                  'Enter date',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
-                ),
+              Text(
+                'You will be notified to take ${_medicine.text} everyday at ${_time.hour}:${_time.minute}',
               ),
               SizedBox(
                 height: 10,
               ),
-              Text('Date picked:'),
-              Text(
-                  '${_dateTime.day.toString()}/${_dateTime.month.toString()}/${_dateTime.year.toString()}')
+              ElevatedButton(
+                onPressed: () async {
+                  final TimeOfDay? _newtime = await showTimePicker(
+                    context: context,
+                    initialTime: _time,
+                  );
+                  if (_newtime != null) {
+                    setState(() {
+                      _time = _newtime;
+                    });
+                  }
+                },
+                child: Text(
+                  'Enter time',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                ),
+              ),
             ],
           ),
-          Row(
-            children: [
-              ElevatedButton(
-                  onPressed: () {
-                    print(_medicine.text);
-                    print(_dateTime);
-                    Database.addItem(
-                        name: _medicine.text, date: _dateTime.toString());
-                  },
-                  child: Text('Add Medicine')),
-            ],
+          ElevatedButton(
+            onPressed: () {
+              print(_medicine.text);
+              print(_time);
+              Database.addItem(name: _medicine.text, time: _time.toString());
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => Medicine()),
+                (Route<dynamic> route) => false,
+              );
+            },
+            child: Text('Add Medicine'),
           ),
         ],
       ),

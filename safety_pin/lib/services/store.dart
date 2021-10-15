@@ -35,8 +35,20 @@ class UserSimplePreferences {
     await _preferences.setString('Message', message);
   }
 
+  static Future saveName(String name) async =>
+      await _preferences.setString('Name', name);
+
+  static Future saveEmail(String email) async =>
+      await _preferences.setString('Email', email);
+
+  static Future savePhone(String phoneNumber) async =>
+      await _preferences.setString('number', phoneNumber);
+
   static String? getCategory() => _preferences.getString('Category');
   static bool? loggedin() => _preferences.getBool('Acc');
   static List? getContacts() => _preferences.getStringList('Emergency');
   static String? getMessage() => _preferences.getString('Message');
+  static String? getName() => _preferences.getString('Name');
+  static String? getEmail() => _preferences.getString('Email');
+  static String? getPhone() => _preferences.getString('number');
 }

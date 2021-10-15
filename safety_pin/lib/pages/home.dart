@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class GMap extends StatefulWidget {
+class MyApp extends StatefulWidget {
   @override
-  _GMapState createState() => _GMapState();
+  _MyAppState createState() => _MyAppState();
 }
 
-class _GMapState extends State<GMap> {
+class _MyAppState extends State<MyApp> {
   late GoogleMapController mapController;
 
-  final LatLng _center = const LatLng(19.1266443, 72.8434408);
+  final LatLng _center = const LatLng(45.521563, -122.677433);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -17,13 +17,17 @@ class _GMapState extends State<GMap> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Maps Sample App'),
+          backgroundColor: Colors.green[700],
+        ),
         body: GoogleMap(
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
             target: _center,
-            zoom: 90.0,
+            zoom: 11.0,
           ),
         ),
       ),

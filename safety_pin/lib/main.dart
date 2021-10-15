@@ -6,6 +6,7 @@ import 'package:safety_pin/pages/bothpages.dart';
 import 'package:safety_pin/pages/categories/adult.dart';
 import 'package:safety_pin/pages/categories/parentchild/child/childgame.dart';
 import 'package:safety_pin/pages/categories/parentchild/parentsetup.dart';
+import 'package:safety_pin/pages/home.dart';
 import 'package:safety_pin/pages/setup.dart';
 import 'package:safety_pin/services/store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,6 +19,7 @@ Future<void> main() async {
   await UserSimplePreferences.init();
   await Device.init();
   await SharedPreferences.getInstance();
+  // SdkContext.init(IsolateOrigin.main);
   runApp(
     // DevicePreview(
     // enabled: !kReleaseMode,
@@ -56,6 +58,6 @@ class CheckPage extends StatelessWidget {
     } else {
       return WelcomeFrame();
     }
-    // return SetupForm();
+    // return HereMaps();
   }
 }

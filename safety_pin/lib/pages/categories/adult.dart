@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:safety_pin/helpers/dialogHelper.dart';
 import 'package:safety_pin/pages/Welcome.dart';
 import 'package:safety_pin/pages/home.dart';
+import 'package:safety_pin/pages/profilepage.dart';
 import 'package:safety_pin/services/store.dart';
 
 class Adult extends StatelessWidget {
@@ -16,7 +17,7 @@ class Adult extends StatelessWidget {
         title: Text('ADULT'),
         centerTitle: true,
       ),
-      body: GMap(),
+      body: MyApp(),
       drawer: Drawer(
           child: ListView(
         // padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
@@ -29,19 +30,38 @@ class Adult extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'You have logged in as an',
+                      'Hello,',
                       style: TextStyle(
                         fontSize: 18,
                       ),
                     ),
                     Text(
-                      '${UserSimplePreferences.getCategory()}',
+                      '${UserSimplePreferences.getName()}',
                       style: TextStyle(fontSize: 25),
                     ),
                   ],
                 ),
                 decoration: BoxDecoration(color: Colors.pink),
               )),
+          Container(
+            padding: EdgeInsets.all(10),
+            child: ListTile(
+              trailing: Icon(
+                Icons.login,
+                color: Colors.pink,
+                size: 30.0,
+              ),
+              title: Center(
+                child: const Text('Your contact details',
+                    style: TextStyle(fontSize: 20, color: Colors.blueGrey)),
+              ),
+              onTap: () {
+                print('Contact Details');
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()));
+              },
+            ),
+          ),
           ListTile(
             title: const Text(
               'Edit Contacts List',

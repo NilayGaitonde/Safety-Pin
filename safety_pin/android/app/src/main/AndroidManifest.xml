@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.safety_pin">
+    package="com.example.safety_pin"
+    android:installLocation="preferExternal">
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -7,6 +8,8 @@
    <application
         android:label="safety_pin"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.here.sdk.access_key_id" android:value="gf38-TjzNepPJ98XDgzjkQ"/>
+        <meta-data android:name="com.here.sdk.access_key_secret" android:value="JpcubIUeI9q6AV40pN9KRWIofqc9QbagP3DybMeoQR5XyVEAmW1_dRB-VTkDFeCyWvPFvKiEjNblibf6aSUMQA"/>
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAUYoBc1hqLLL5WuPxA1Q23NyP9iKcrjRw"/>
         <activity

@@ -12,12 +12,13 @@ class BothPages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget widget = GMap();
+    Widget widget = MyApp();
+    print(UserSimplePreferences.getCategory());
     switch (UserSimplePreferences.getCategory()) {
       case 'Adult':
         widget = new Adult();
         break;
-      case 'Parent/Child':
+      case 'Child & Parent':
         widget = new Parent();
         break;
       case 'Senior Citizen':

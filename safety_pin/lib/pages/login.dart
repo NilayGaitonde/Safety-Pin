@@ -9,8 +9,11 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  String name = 'Hans';
   final items = ['Child & Parent', 'Adult', 'Senior Citizen'];
   String value = 'Adult';
+  late String number;
+  late String email;
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +51,8 @@ class _LoginFormState extends State<LoginForm> {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.grey[800]))),
                       Container(
-                          padding: EdgeInsets.fromLTRB(252.0, 110.0, 0.0, 0.0),
-                          child: Text('.',
+                          padding: EdgeInsets.fromLTRB(30.0, 190.0, 0.0, 0.0),
+                          child: Text('$name.',
                               style: TextStyle(
                                   fontSize: 80,
                                   fontWeight: FontWeight.bold,
@@ -66,12 +69,45 @@ class _LoginFormState extends State<LoginForm> {
                   child: Column(children: <Widget>[
                     TextField(
                       decoration: InputDecoration(
+                          labelText: 'NAME',
+                          labelStyle: TextStyle(
+                            color: Colors.grey,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.pink))),
+                      onChanged: (value) => setState(() {
+                        name = value;
+                      }),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                          labelText: 'PHONE NUMBER',
+                          labelStyle: TextStyle(
+                            color: Colors.grey,
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.pink))),
+                      onChanged: (value) => setState(() {
+                        number = value;
+                      }),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
                           labelText: 'EMAIL',
                           labelStyle: TextStyle(
                             color: Colors.grey,
                           ),
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.pink))),
+                      onChanged: (value) => setState(() {
+                        email = value;
+                      }),
                     ),
                     SizedBox(
                       height: 20,
@@ -85,7 +121,6 @@ class _LoginFormState extends State<LoginForm> {
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.pink))),
                       obscureText: true,
-                      // maxLength: 10,
                     ),
                     SizedBox(
                       height: 20,
@@ -121,6 +156,9 @@ class _LoginFormState extends State<LoginForm> {
                         UserSimplePreferences.setCategory(this.value);
                         UserSimplePreferences.setLoggedIn(true);
                         print(UserSimplePreferences.getCategory());
+                        UserSimplePreferences.saveName(name);
+                        UserSimplePreferences.saveEmail(email);
+                        UserSimplePreferences.savePhone(number);
                         Navigator.of(context).pushReplacementNamed('/setup');
                       },
                     )

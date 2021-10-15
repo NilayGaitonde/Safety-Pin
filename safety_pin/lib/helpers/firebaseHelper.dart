@@ -14,7 +14,7 @@ class Database {
 
   static Future<void> addItem({
     required String name,
-    required String date,
+    required String time,
   }) async {
     print(userUid);
     DocumentReference documentReference =
@@ -22,7 +22,7 @@ class Database {
 
     Map<String, dynamic> data = <String, dynamic>{
       "medicine": name,
-      "date": date,
+      "time": time,
     };
 
     await documentReference
@@ -35,21 +35,20 @@ class Database {
     print('Read items');
     CollectionReference<Map<String, dynamic>> notesItemCollection =
         _mainCollection.doc(userUid).collection('items');
-
     return notesItemCollection.snapshots();
   }
 
   static Future<void> updateItem({
     required String title,
-    required String description,
+    required String time,
     required String docId,
   }) async {
     DocumentReference documentReferencer =
         _mainCollection.doc(userUid).collection('items').doc(docId);
 
     Map<String, dynamic> data = <String, dynamic>{
-      "title": title,
-      "description": description,
+      "medicine": title,
+      "time": time,
     };
 
     await documentReferencer
@@ -63,7 +62,7 @@ class Database {
   }) async {
     DocumentReference documentReferencer =
         _mainCollection.doc(userUid).collection('items').doc(docId);
-
+    print(docId);
     await documentReferencer
         .delete()
         .whenComplete(() => print('Note item deleted from the database'))

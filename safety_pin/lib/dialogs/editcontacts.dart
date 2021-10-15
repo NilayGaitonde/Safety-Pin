@@ -9,9 +9,21 @@ class EditContacts extends StatefulWidget {
 }
 
 class _EditContactsState extends State<EditContacts> {
-  final TextEditingController _editingController1 = TextEditingController();
-  final TextEditingController _editingController2 = TextEditingController();
-  final TextEditingController _editingController3 = TextEditingController();
+  List<String>? numbers = UserSimplePreferences.getContacts()!.cast<String>();
+
+  late TextEditingController _editingController1;
+  late TextEditingController _editingController2;
+  late TextEditingController _editingController3;
+
+  @override
+  void initState() {
+    _editingController1 = TextEditingController(text: numbers![0]);
+    _editingController2 = TextEditingController(text: numbers![1]);
+    _editingController3 = TextEditingController(text: numbers![2]);
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -23,10 +35,7 @@ class _EditContactsState extends State<EditContacts> {
   }
 
   _buildChild(BuildContext context) {
-    List<String>? numbers = ['0', '1', '2'];
-    if (UserSimplePreferences.getContacts() != null) {}
     print(numbers);
-    // text
     print('Hello world dialog box');
     return Container(
       height: 372,
@@ -108,11 +117,11 @@ class _EditContactsState extends State<EditContacts> {
           SizedBox(height: 10),
           ElevatedButton(
               onPressed: () {
-                numbers[0] = _editingController1.text;
-                numbers[1] = _editingController2.text;
-                numbers[2] = _editingController3.text;
+                numbers![0] = _editingController1.text;
+                numbers![1] = _editingController2.text;
+                numbers![2] = _editingController3.text;
                 print(UserSimplePreferences.getContacts());
-                UserSimplePreferences.setContact(numbers);
+                UserSimplePreferences.setContact(numbers!);
                 Navigator.of(context).pushReplacementNamed('/BothPages');
               },
               child: Text('Done'))

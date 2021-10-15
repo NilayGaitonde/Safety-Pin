@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:safety_pin/pages/model/user.dart';
-import 'package:safety_pin/profile/editprofilepage.dart';
-import 'package:safety_pin/profile/userpreferences.dart';
-import 'package:safety_pin/profile/widgets/appbarwidgets.dart';
-import 'package:safety_pin/profile/widgets/profilewidget.dart';
+import 'package:safety_pin/services/store.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -13,55 +9,45 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final user = UserPreferences.myUser;
-  bool isEdit = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(context),
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          ProfileWidget(
-            isEdit: isEdit,
-            imagePath: user.imagePath,
-            onClicked: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => EditProfilePage()));
-            },
-          ),
-          SizedBox(
-            height: 24,
-          ),
-          buildName(user),
-          SizedBox(
-            height: 50,
-          ),
-          buildNumbers(user),
-        ],
-      ),
-    );
+        appBar: AppBar(
+          title: Text('PROFILE PAGE'),
+          centerTitle: true,
+        ),
+        body: ListView(
+          physics: BouncingScrollPhysics(),
+          children: [
+            buildName(),
+            SizedBox(
+              height: 50,
+            ),
+            buildNumbers(),
+          ],
+        ));
   }
 
-  Widget buildName(User user) => Column(
+  Widget buildName() => Column(
         children: [
           Text(
-            user.name,
+            UserSimplePreferences.getName()!,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           const SizedBox(
             height: 4,
           ),
           Text(
-            user.number,
+            UserSimplePreferences.getPhone()!,
             style: TextStyle(color: Colors.grey),
           ),
           Text(
-            user.email,
+            UserSimplePreferences.getEmail()!,
             style: TextStyle(color: Colors.grey),
           ),
         ],
       );
+
   Widget numberTemplate(number) {
     return Card(
       color: Colors.pink,
@@ -78,9 +64,9 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget buildNumbers(User user) => Column(
+  Widget buildNumbers() => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: user.numbers
+        children: UserSimplePreferences.getContacts()!
             .map((number) => Center(child: numberTemplate(number)))
             .toList(),
       );

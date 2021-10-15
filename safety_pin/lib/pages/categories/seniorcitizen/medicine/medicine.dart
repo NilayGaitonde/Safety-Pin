@@ -44,7 +44,8 @@ class _MedicineState extends State<Medicine> {
                   var noteInfo = snapshot.data!.docs[index].data();
                   print('Title:$noteInfo');
                   String title = noteInfo['medicine'];
-                  String date = noteInfo['date'];
+                  String time = noteInfo['time'];
+                  String docID = snapshot.data!.docs[index].id;
 
                   return Ink(
                     decoration: BoxDecoration(
@@ -55,13 +56,15 @@ class _MedicineState extends State<Medicine> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
+                      onTap: () => DialogHelper.editmedicine(
+                          context, docID, title, time),
                       title: Text(
                         title,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       subtitle: Text(
-                        date,
+                        time,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
