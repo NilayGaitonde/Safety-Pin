@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:safety_pin/helpers/firebaseHelper.dart';
 import 'package:safety_pin/pages/categories/seniorcitizen/medicine/medicine.dart';
+import 'package:safety_pin/services/notifications.dart';
 
 class AddMedicine extends StatefulWidget {
   const AddMedicine({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class AddMedicine extends StatefulWidget {
 }
 
 class _AddMedicineState extends State<AddMedicine> {
+  final NotificationManager manager = NotificationManager();
   final TextEditingController _medicine = TextEditingController();
   TimeOfDay _time = TimeOfDay(hour: 9, minute: 10);
   @override
@@ -18,11 +20,11 @@ class _AddMedicineState extends State<AddMedicine> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       elevation: 0,
       backgroundColor: Colors.transparent,
-      child: _buildChild(context),
+      child: _buildChild(context, manager),
     );
   }
 
-  _buildChild(BuildContext context) {
+  _buildChild(BuildContext context, NotificationManager manager) {
     print('Adding medicine dialog');
     return Container(
       height: 372,
@@ -90,6 +92,8 @@ class _AddMedicineState extends State<AddMedicine> {
               print(_medicine.text);
               print(_time);
               Database.addItem(name: _medicine.text, time: _time.toString());
+              manager.showNotificationDaily(
+                  _medicine.text, _time.hour, _time.minute);
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => Medicine()),
