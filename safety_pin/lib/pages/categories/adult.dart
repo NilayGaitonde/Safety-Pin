@@ -5,6 +5,7 @@ import 'package:safety_pin/pages/Welcome.dart';
 import 'package:safety_pin/pages/home.dart';
 import 'package:safety_pin/pages/profilepage.dart';
 import 'package:safety_pin/services/store.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 class Adult extends StatelessWidget {
   const Adult({Key? key}) : super(key: key);
@@ -73,7 +74,14 @@ class Adult extends StatelessWidget {
             },
           ),
           ListTile(
-            title: const Text('Option 1'),
+            title: const Text(
+              'Call help',
+              style: TextStyle(fontSize: 15),
+            ),
+            onTap: () async {
+              print('Help tap');
+              await UrlLauncher.launch('tel: +91 9987207322');
+            },
           ),
           SizedBox(
             height: 523,

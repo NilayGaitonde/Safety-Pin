@@ -7,7 +7,6 @@ class HereMaps extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'HERE SDK for Flutter - Hello Map!',
       home: HereMap(onMapCreated: _onMapCreated),
     );
   }
@@ -23,7 +22,7 @@ class HereMaps extends StatelessWidget {
         return;
       }
 
-      const double distanceToEarthInMeters = 100;
+      const double distanceToEarthInMeters = 1000;
       hereMapController.camera.lookAtPointWithDistance(
           GeoCoordinates(
               position.latitude.toDouble(), position.longitude.toDouble()),

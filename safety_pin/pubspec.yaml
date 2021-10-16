@@ -43,6 +43,7 @@ dependencies:
   device_info: ^2.0.2
   here_sdk:
     path: plugins/here_sdk
+  url_launcher: ^6.0.12
 
 dev_dependencies:
   flutter_test:

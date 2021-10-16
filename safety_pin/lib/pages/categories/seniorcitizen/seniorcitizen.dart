@@ -4,7 +4,6 @@ import 'package:safety_pin/pages/Welcome.dart';
 import 'package:safety_pin/pages/categories/seniorcitizen/medicine/medicine.dart';
 import 'package:safety_pin/pages/home.dart';
 import 'package:safety_pin/pages/profilepage.dart';
-// import 'package:safety_pin/profile/profilepage.dart';
 import 'package:safety_pin/services/store.dart';
 
 class SeniorCitizen extends StatelessWidget {
