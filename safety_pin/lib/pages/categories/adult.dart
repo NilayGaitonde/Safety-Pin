@@ -17,7 +17,7 @@ class Adult extends StatelessWidget {
         title: Text('ADULT'),
         centerTitle: true,
       ),
-      body: MyApp(),
+      body: HereMaps(),
       drawer: Drawer(
           child: ListView(
         // padding: EdgeInsets.fromLTRB(0, 100, 0, 0),

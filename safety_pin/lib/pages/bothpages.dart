@@ -12,7 +12,7 @@ class BothPages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget widget = MyApp();
+    Widget widget = HereMaps();
     print(UserSimplePreferences.getCategory());
     switch (UserSimplePreferences.getCategory()) {
       case 'Adult':

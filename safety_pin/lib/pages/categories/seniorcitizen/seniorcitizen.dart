@@ -20,7 +20,7 @@ class SeniorCitizen extends StatelessWidget {
             child:
                 Text('SENIOR CITIZEN', style: TextStyle(color: Colors.white))),
       ),
-      body: MyApp(),
+      body: HereMaps(),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,

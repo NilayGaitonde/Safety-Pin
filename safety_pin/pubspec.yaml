@@ -41,6 +41,8 @@ dependencies:
   cloud_firestore: ^2.5.3
   cloud_functions: ^3.0.4
   device_info: ^2.0.2
+  here_sdk:
+    path: plugins/here_sdk
 
 dev_dependencies:
   flutter_test:

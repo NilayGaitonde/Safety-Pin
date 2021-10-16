@@ -2,11 +2,11 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:safety_pin/pages/Welcome.dart';
+import 'package:here_sdk/core.dart';
 import 'package:safety_pin/pages/bothpages.dart';
 import 'package:safety_pin/pages/categories/adult.dart';
 import 'package:safety_pin/pages/categories/parentchild/child/childgame.dart';
 import 'package:safety_pin/pages/categories/parentchild/parentsetup.dart';
-import 'package:safety_pin/pages/home.dart';
 import 'package:safety_pin/pages/setup.dart';
 import 'package:safety_pin/services/store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,7 +19,7 @@ Future<void> main() async {
   await UserSimplePreferences.init();
   await Device.init();
   await SharedPreferences.getInstance();
-  // SdkContext.init(IsolateOrigin.main);
+  SdkContext.init(IsolateOrigin.main);
   runApp(
     // DevicePreview(
     // enabled: !kReleaseMode,

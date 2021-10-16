@@ -1,36 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:here_sdk/core.dart';
+import 'package:here_sdk/mapview.dart';
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  late GoogleMapController mapController;
-
-  final LatLng _center = const LatLng(45.521563, -122.677433);
-
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
-  }
-
+class HereMaps extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Maps Sample App'),
-          backgroundColor: Colors.green[700],
-        ),
-        body: GoogleMap(
-          onMapCreated: _onMapCreated,
-          initialCameraPosition: CameraPosition(
-            target: _center,
-            zoom: 11.0,
-          ),
-        ),
-      ),
+      title: 'HERE SDK for Flutter - Hello Map!',
+      home: HereMap(onMapCreated: _onMapCreated),
     );
+  }
+
+  Future<void> _onMapCreated(HereMapController hereMapController) async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    print('${position.latitude.toString()}\n${position.longitude.toString()}');
+    hereMapController.mapScene.loadSceneForMapScheme(MapScheme.satellite,
+        (MapError? error) {
+      if (error != null) {
+        print('Map scene not loaded. MapError: ${error.toString()}');
+        return;
+      }
+
+      const double distanceToEarthInMeters = 100;
+      hereMapController.camera.lookAtPointWithDistance(
+          GeoCoordinates(
+              position.latitude.toDouble(), position.longitude.toDouble()),
+          distanceToEarthInMeters);
+    });
   }
 }
