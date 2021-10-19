@@ -1,8 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:safety_pin/services/store.dart';
+import 'package:geoflutterfire/geoflutterfire.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-final CollectionReference _mainCollection = _firestore.collection('medicines');
+final CollectionReference _medicinecollection =
+    _firestore.collection('medicines');
+final CollectionReference _trackcollection = _firestore.collection('track');
+final geo = Geoflutterfire();
 
 class Device {
   static String deviceId = "";
@@ -18,7 +23,7 @@ class Database {
   }) async {
     print(userUid);
     DocumentReference documentReference =
-        _mainCollection.doc(userUid).collection('items').doc();
+        _medicinecollection.doc(userUid).collection('items').doc();
 
     Map<String, dynamic> data = <String, dynamic>{
       "medicine": name,
@@ -34,7 +39,7 @@ class Database {
   static Stream<QuerySnapshot<Map<String, dynamic>>> readItems() {
     print('Read items');
     CollectionReference<Map<String, dynamic>> notesItemCollection =
-        _mainCollection.doc(userUid).collection('items');
+        _medicinecollection.doc(userUid).collection('items');
     return notesItemCollection.snapshots();
   }
 
@@ -44,7 +49,7 @@ class Database {
     required String docId,
   }) async {
     DocumentReference documentReferencer =
-        _mainCollection.doc(userUid).collection('items').doc(docId);
+        _medicinecollection.doc(userUid).collection('items').doc(docId);
 
     Map<String, dynamic> data = <String, dynamic>{
       "medicine": title,
@@ -61,11 +66,77 @@ class Database {
     required String docId,
   }) async {
     DocumentReference documentReferencer =
-        _mainCollection.doc(userUid).collection('items').doc(docId);
+        _medicinecollection.doc(userUid).collection('items').doc(docId);
     print(docId);
     await documentReferencer
         .delete()
         .whenComplete(() => print('Note item deleted from the database'))
         .catchError((e) => print(e));
+  }
+}
+
+class ParentChild {
+  static String? userUid = Device.deviceId;
+
+  static Future<void> initial({
+    required String time,
+    required String latitude,
+    required String longitude,
+    required String childDevID,
+    required bool request,
+    required bool response,
+  }) async {
+    var output = await placemarkFromCoordinates(
+        double.parse(latitude), double.parse(longitude));
+    String address = "${output[0].locality},${output[0].subAdministrativeArea}";
+    print(output);
+    print('User ID:$userUid');
+    DocumentReference documentReference =
+        _trackcollection.doc(userUid).collection(childDevID).doc();
+    Map<String, dynamic> data = <String, dynamic>{
+      "time": time,
+      "request": request,
+      "response": response,
+      "Address": address,
+    };
+    await documentReference
+        .set(data)
+        .whenComplete(() => print('Address requested'))
+        .catchError((e) => print(e));
+  }
+
+  static Future<void> updateRequest({
+    required String time,
+    required String childDevID,
+    required bool request,
+    required bool response,
+    required String latitude,
+    required String longitude,
+    required String docId,
+  }) async {
+    var output = await placemarkFromCoordinates(
+        double.parse(latitude), double.parse(longitude));
+    String address = "${output[0].locality},${output[0].subAdministrativeArea}";
+    print(output);
+    DocumentReference documentReference =
+        _trackcollection.doc(userUid).collection(childDevID).doc(docId);
+    Map<String, dynamic> data = <String, dynamic>{
+      "time": time,
+      "request": request,
+      "Address": address,
+      "response": response,
+    };
+    await documentReference
+        .update(data)
+        .whenComplete(() => print("Track item updated in the database"))
+        .catchError((e) => print(e));
+  }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> readItems() {
+    print('Read items');
+    String devId = UserSimplePreferences.getDeviceID()!;
+    CollectionReference<Map<String, dynamic>> notesItemCollection =
+        _trackcollection.doc(userUid).collection(devId);
+    return notesItemCollection.snapshots();
   }
 }

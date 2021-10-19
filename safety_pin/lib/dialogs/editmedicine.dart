@@ -121,11 +121,7 @@ class _EditMedicineState extends State<EditMedicine> {
                     time: _time.toString(),
                     docId: widget.documentID,
                   );
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => Medicine()),
-                    (Route<dynamic> route) => false,
-                  );
+                  Navigator.pop(context);
                 },
                 child: Text('Update medicine'),
               ),

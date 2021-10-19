@@ -4,8 +4,7 @@ import 'package:safety_pin/pages/categories/seniorcitizen/seniorcitizen.dart';
 import 'package:safety_pin/pages/home.dart';
 import 'package:safety_pin/pages/landingpage.dart';
 import 'package:safety_pin/services/store.dart';
-
-import 'categories/parentchild/parent.dart';
+import 'categories/parentchild/intiSetup.dart';
 
 class BothPages extends StatelessWidget {
   const BothPages({Key? key}) : super(key: key);
@@ -19,7 +18,7 @@ class BothPages extends StatelessWidget {
         widget = new Adult();
         break;
       case 'Child & Parent':
-        widget = new Parent();
+        widget = new ChildParentSetup();
         break;
       case 'Senior Citizen':
         widget = new SeniorCitizen();

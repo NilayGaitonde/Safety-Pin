@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:safety_pin/helpers/firebaseHelper.dart';
-import 'package:safety_pin/pages/categories/seniorcitizen/medicine/medicine.dart';
 import 'package:safety_pin/services/notifications.dart';
 
 class AddMedicine extends StatefulWidget {
@@ -94,11 +93,7 @@ class _AddMedicineState extends State<AddMedicine> {
               Database.addItem(name: _medicine.text, time: _time.toString());
               manager.showNotificationDaily(
                   _medicine.text, _time.hour, _time.minute);
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => Medicine()),
-                (Route<dynamic> route) => false,
-              );
+              Navigator.pop(context);
             },
             child: Text('Add Medicine'),
           ),

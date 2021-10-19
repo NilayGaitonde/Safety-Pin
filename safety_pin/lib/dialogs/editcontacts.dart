@@ -122,7 +122,7 @@ class _EditContactsState extends State<EditContacts> {
                 numbers![2] = _editingController3.text;
                 print(UserSimplePreferences.getContacts());
                 UserSimplePreferences.setContact(numbers!);
-                Navigator.of(context).pushReplacementNamed('/BothPages');
+                Navigator.pop(context);
               },
               child: Text('Done'))
         ],

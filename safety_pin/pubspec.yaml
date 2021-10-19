@@ -45,6 +45,9 @@ dependencies:
     path: plugins/here_sdk
   url_launcher: ^6.0.12
   flutter_local_notifications: ^9.0.0
+  geoflutterfire: ^3.0.1
+  intl: ^0.17.0
+  geocoding: ^2.0.1
 
 dev_dependencies:
   flutter_test:

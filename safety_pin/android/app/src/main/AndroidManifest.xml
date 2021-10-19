@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.safety_pin"
-    android:installLocation="preferExternal" >
+    package="com.example.safety_pin">
+    <!-- android:installLocation="preferExternal"  -->
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.INTERNET"/>

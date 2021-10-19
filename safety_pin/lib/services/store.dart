@@ -14,10 +14,10 @@ class UserSimplePreferences {
     var deviceInfo = DeviceInfoPlugin();
     if (Platform.isIOS) {
       var iosDeviceInfo = await deviceInfo.iosInfo;
-      return iosDeviceInfo.identifierForVendor; // unique ID on iOS
+      return iosDeviceInfo.identifierForVendor;
     } else {
       var androidDeviceInfo = await deviceInfo.androidInfo;
-      return androidDeviceInfo.androidId; // unique ID on Android
+      return androidDeviceInfo.androidId;
     }
   }
 
@@ -35,6 +35,26 @@ class UserSimplePreferences {
     await _preferences.setString('Message', message);
   }
 
+  static void trackCount() async {
+    if (_preferences.containsKey('Counter')) {
+      print('Counter exists');
+      var counter = _preferences.getInt('Counter') as int;
+      _preferences.setInt('Counter', counter + 1);
+    } else {
+      print('Counter exists');
+      _preferences.setInt('Counter', 0);
+    }
+  }
+
+  static bool checkDeviceID() {
+    if (_preferences.containsKey('DeviceID')) {
+      print('We good');
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   static Future saveName(String name) async =>
       await _preferences.setString('Name', name);
 
@@ -44,6 +64,8 @@ class UserSimplePreferences {
   static Future savePhone(String phoneNumber) async =>
       await _preferences.setString('number', phoneNumber);
 
+  static void saveDeviceID(String deviceID) async =>
+      await _preferences.setString('DeviceID', deviceID);
   static String? getCategory() => _preferences.getString('Category');
   static bool? loggedin() => _preferences.getBool('Acc');
   static List? getContacts() => _preferences.getStringList('Emergency');
@@ -51,4 +73,6 @@ class UserSimplePreferences {
   static String? getName() => _preferences.getString('Name');
   static String? getEmail() => _preferences.getString('Email');
   static String? getPhone() => _preferences.getString('number');
+  static int? getCount() => _preferences.getInt('Counter');
+  static String? getDeviceID() => _preferences.getString('DeviceID');
 }
