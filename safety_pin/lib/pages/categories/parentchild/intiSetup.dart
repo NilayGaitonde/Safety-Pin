@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:safety_pin/services/store.dart';
 
 enum Age { parent, child }
 
@@ -11,6 +12,7 @@ class ChildParentSetup extends StatefulWidget {
 
 class _ChildParentSetupState extends State<ChildParentSetup> {
   Age? _age = Age.parent;
+  String parentChild = UserSimplePreferences.getParentChild()!;
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +58,7 @@ class _ChildParentSetupState extends State<ChildParentSetup> {
               SizedBox(height: 140),
               ElevatedButton(
                   onPressed: () {
+                    UserSimplePreferences.parentChild(_age.toString());
                     if (_age.toString() == 'Age.parent')
                       Navigator.of(context).pushNamed('/Parent');
                     else

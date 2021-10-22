@@ -14,6 +14,7 @@ class _LoginFormState extends State<LoginForm> {
   String value = 'Adult';
   late String number;
   late String email;
+  var _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -135,53 +136,167 @@ class _LoginFormState extends State<LoginForm> {
                       onChanged: (value) => setState(() {
                         this.value = value!;
                       }),
+
                     ),
-                    SizedBox(
-                      height: 60,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(
+                      top: 20.0,
+                      left: 30,
+                      right: 30,
                     ),
-                    TextButton(
-                      child: Text(
-                        'LOGIN',
-                        style: TextStyle(fontSize: 18),
+                    child: Column(children: <Widget>[
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: 'NAME',
+                            labelStyle: TextStyle(
+                              color: Colors.grey,
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.pink))),
+                        onChanged: (value) => setState(() {
+                          name = value;
+                        }),
+                        validator: (value) {
+                          print('Name validation');
+                          if (value!.isEmpty) {
+                            return 'Please enter your name';
+                          }
+                        },
                       ),
-                      style: TextButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30)),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 130),
-                        backgroundColor: Colors.pink,
-                        primary: Colors.white,
+                      SizedBox(
+                        height: 20,
                       ),
-                      onPressed: () async {
-                        UserSimplePreferences.setCategory(this.value);
-                        UserSimplePreferences.setLoggedIn(true);
-                        print(UserSimplePreferences.getCategory());
-                        UserSimplePreferences.saveName(name);
-                        UserSimplePreferences.saveEmail(email);
-                        UserSimplePreferences.savePhone(number);
-                        Navigator.of(context).pushReplacementNamed('/setup');
-                      },
-                    )
-                    // Container(
-                    //   height: 55,
-                    //   child: Material(
-                    //       borderRadius: BorderRadius.circular(30),
-                    //       shadowColor: Colors.pinkAccent,
-                    //       color: Colors.pink,
-                    //       elevation: 7.0,
-                    //       child: GestureDetector(
-                    //         onTap: () {},
-                    //         child: Center(
-                    //           child: Text(
-                    //             'LOGIN',
-                    //             style: TextStyle(color: Colors.white),
-                    //           ),
-                    //         ),
-                    //       )),
-                    // )
-                  ]),
-                )
-              ]),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: 'PHONE NUMBER',
+                            labelStyle: TextStyle(
+                              color: Colors.grey,
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.pink))),
+                        onChanged: (value) => setState(() {
+                          number = value;
+                        }),
+                        validator: (value) {
+                          print('Phone validation');
+                          RegExp regex =
+                              new RegExp(r'(\+91[\-\s]?)?[0]?(91)?[789]\d{9}$');
+                          if (value!.isEmpty) {
+                            print('Enter phone number');
+                            return 'Enter phone number';
+                          } else if (!regex.hasMatch(value)) {
+                            print('Enter valid phone number');
+                            return 'Enter Valid Phone Number';
+                          } else {
+                            return null;
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            labelText: 'EMAIL',
+                            labelStyle: TextStyle(
+                              color: Colors.grey,
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.pink))),
+                        onChanged: (value) => setState(() {
+                          email = value;
+                        }),
+                        validator: (value) {
+                          print('Email validation');
+                          RegExp regex = new RegExp(
+                              r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+                          if (value!.isEmpty) {
+                            return 'Enter email number';
+                          } else if (!regex.hasMatch(value))
+                            return 'Enter Valid Email ID';
+                          else {
+                            return null;
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+
+                      SizedBox(
+                        height: 20,
+                      ),
+                      DropdownButtonFormField<String>(
+                        value: value,
+                        iconSize: 36,
+                        isExpanded: true,
+                        elevation: 5,
+                        icon: Icon(Icons.arrow_drop_down, color: Colors.pink),
+                        items: items.map(buildMenuItem).toList(),
+                        onChanged: (value) => setState(() {
+                          this.value = value!;
+                        }),
+                      ),
+                      SizedBox(
+                        height: 60,
+                      ),
+                      TextButton(
+                        child: Text(
+                          'LOGIN',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        style: TextButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 130),
+                          backgroundColor: Colors.pink,
+                          primary: Colors.white,
+                        ),
+                        onPressed: () async {
+                          print('Hello world');
+                          final isValid = _formKey.currentState?.validate();
+                          if (isValid == null) {
+                            print('Null${_formKey.currentState?.validate()}');
+                            return;
+                          }
+                          if (!isValid) {
+                            print('Mr. Stark I dont feel so good');
+                            return;
+                          }
+                          print('We good');
+                          _formKey.currentState!.save();
+                          UserSimplePreferences.setCategory(this.value);
+                          UserSimplePreferences.setLoggedIn(true);
+                          print(UserSimplePreferences.getCategory());
+                          UserSimplePreferences.saveName(name);
+                          UserSimplePreferences.saveEmail(email);
+                          UserSimplePreferences.savePhone(number);
+                          Navigator.of(context).pushReplacementNamed('/setup');
+                        },
+                      )
+                      // Container(
+                      //   height: 55,
+                      //   child: Material(
+                      //       borderRadius: BorderRadius.circular(30),
+                      //       shadowColor: Colors.pinkAccent,
+                      //       color: Colors.pink,
+                      //       elevation: 7.0,
+                      //       child: GestureDetector(
+                      //         onTap: () {},
+                      //         child: Center(
+                      //           child: Text(
+                      //             'LOGIN',
+                      //             style: TextStyle(color: Colors.white),
+                      //           ),
+                      //         ),
+                      //       )),
+                      // )
+                    ]),
+                  )
+                ]),
+          ),
         ));
   }
 

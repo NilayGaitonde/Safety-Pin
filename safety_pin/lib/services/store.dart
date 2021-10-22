@@ -21,6 +21,9 @@ class UserSimplePreferences {
     }
   }
 
+  static Future parentChild(String age) async =>
+      await _preferences.setString('Age', age);
+
   static Future setLoggedIn(bool loggedIn) async =>
       await _preferences.setBool('Acc', loggedIn);
   static Future setContact(List<String> numbers) async =>
@@ -74,5 +77,6 @@ class UserSimplePreferences {
   static String? getEmail() => _preferences.getString('Email');
   static String? getPhone() => _preferences.getString('number');
   static int? getCount() => _preferences.getInt('Counter');
+  static String? getParentChild() => _preferences.getString('Age');
   static String? getDeviceID() => _preferences.getString('DeviceID');
 }
