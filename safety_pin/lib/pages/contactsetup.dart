@@ -20,15 +20,30 @@ class _ContactState extends State<Contact> {
       decoration: BoxDecoration(color: Colors.white),
       child: Column(
         children: [
-          Text(
-            'Current contacts',
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.underline,
+          Container(
+            padding: EdgeInsets.only(top: 20),
+            child: Text(
+              'Current contacts',
+              style: TextStyle(
+                color: Colors.pink,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                // decoration: ,
+              ),
             ),
           ),
           SizedBox(height: 20),
+          Container(
+              child: Text('Enter your 3 emergency contacts below.',
+                  style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[600]))),
+          SizedBox(height: 30),
+          Container(
+            child: new Image.asset('assets/call-01.png'),
+          ),
+          SizedBox(height: 30),
           SizedBox(
             width: 270,
             child: TextFormField(
@@ -89,18 +104,30 @@ class _ContactState extends State<Contact> {
             ),
           ),
           SizedBox(
-            height: 100,
+            height: 50,
           ),
-          ElevatedButton(
-              onPressed: () {
-                numbers[0] = _editingController1.text;
-                numbers[1] = _editingController2.text;
-                numbers[2] = _editingController3.text;
-                print(UserSimplePreferences.getContacts());
-                UserSimplePreferences.setContact(numbers);
-                Navigator.of(context).pushReplacementNamed('/BothPages');
-              },
-              child: Text('Done'))
+          TextButton(
+            child: Text(
+              'DONE',
+              style: TextStyle(fontSize: 18),
+            ),
+            style: TextButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 15, horizontal: 130),
+              backgroundColor: Colors.pink,
+              primary: Colors.white,
+            ),
+            onPressed: () {
+              numbers[0] = _editingController1.text;
+              numbers[1] = _editingController2.text;
+              numbers[2] = _editingController3.text;
+              print(UserSimplePreferences.getContacts());
+              UserSimplePreferences.setContact(numbers);
+              Navigator.of(context).pushReplacementNamed('/BothPages');
+            },
+          )
         ],
       ),
     );

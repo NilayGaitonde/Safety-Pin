@@ -9,7 +9,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  String name = 'Hans';
+  String name = 'Friend';
   final items = ['Child & Parent', 'Adult', 'Senior Citizen'];
   String value = 'Adult';
   late String number;
@@ -40,18 +40,18 @@ class _LoginFormState extends State<LoginForm> {
                           padding: EdgeInsets.fromLTRB(30.0, 30.0, 0.0, 0.0),
                           child: Text('Hello',
                               style: TextStyle(
-                                  fontSize: 80,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 60,
+                                  // fontWeight: FontWeight.bold,
                                   color: Colors.grey[800]))),
                       Container(
-                          padding: EdgeInsets.fromLTRB(30.0, 110.0, 0.0, 0.0),
+                          padding: EdgeInsets.fromLTRB(30.0, 87.0, 0.0, 0.0),
                           child: Text('There',
                               style: TextStyle(
-                                  fontSize: 80,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 60,
+                                  // fontWeight: FontWeight.bold,
                                   color: Colors.grey[800]))),
                       Container(
-                          padding: EdgeInsets.fromLTRB(30.0, 190.0, 0.0, 0.0),
+                          padding: EdgeInsets.fromLTRB(30.0, 140.0, 0.0, 0.0),
                           child: Text('$name.',
                               style: TextStyle(
                                   fontSize: 80,
@@ -62,7 +62,7 @@ class _LoginFormState extends State<LoginForm> {
                 ),
                 Container(
                   padding: EdgeInsets.only(
-                    top: 80.0,
+                    top: 20.0,
                     left: 30,
                     right: 30,
                   ),
