@@ -17,10 +17,10 @@ class LandingPage extends StatelessWidget {
           backgroundColor: Colors.redAccent[400],
           body: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 40.0, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 40.0, 0, 80),
                   child: Text('EMERGENCY',
                       style: TextStyle(
                         color: Colors.white,
@@ -29,30 +29,32 @@ class LandingPage extends StatelessWidget {
                       )),
                 ),
                 //   SizedBox(height: 40.0),
-                Container(
-                  height: 460.0,
-                  width: 460.0,
-                  child: FittedBox(
-                    child: AvatarGlow(
-                      endRadius: 60.0,
-                      child: FloatingActionButton(
-                        onPressed: () async {
-                          print('Sending sms');
-                          print(numbers);
-                          print(message);
-                          numbers?.forEach((recepient) async {
-                            print(recepient);
-                            await telephony.sendSms(
-                                to: recepient,
-                                message: message as String,
-                                isMultipart: true);
-                          });
-                        },
-                        child: Text(
-                          'HELP!',
-                          style: TextStyle(color: Colors.red[400]),
+                Positioned(
+                  child: Container(
+                    height: 460.0,
+                    width: 460.0,
+                    child: FittedBox(
+                      child: AvatarGlow(
+                        endRadius: 60.0,
+                        child: FloatingActionButton(
+                          onPressed: () async {
+                            print('Sending sms');
+                            print(numbers);
+                            print(message);
+                            numbers?.forEach((recepient) async {
+                              print(recepient);
+                              await telephony.sendSms(
+                                  to: recepient,
+                                  message: message as String,
+                                  isMultipart: true);
+                            });
+                          },
+                          child: Text(
+                            'HELP!',
+                            style: TextStyle(color: Colors.red[400]),
+                          ),
+                          backgroundColor: Colors.white,
                         ),
-                        backgroundColor: Colors.white,
                       ),
                     ),
                   ),

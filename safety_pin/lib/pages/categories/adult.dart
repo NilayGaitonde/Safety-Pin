@@ -33,6 +33,7 @@ class Adult extends StatelessWidget {
                     Text(
                       'Hello,',
                       style: TextStyle(
+                        color: Colors.white,
                         fontSize: 18,
                       ),
                     ),
