@@ -95,6 +95,7 @@ class _ChildState extends State<Child> {
               child: ListTile(
                 trailing: Icon(
                   Icons.info,
+                  color: Colors.pink,
                   size: 30.0,
                 ),
                 title: Center(
@@ -146,10 +147,12 @@ class _ChildState extends State<Child> {
               child: Switch(
                 onChanged: (newVal) {
                   onSwitchValueChanged(newVal);
+                  
                 },
                 value: switchLocation,
               ),
             ),
+            SizedBox(height: 240),
             Container(
               child: ElevatedButton(
                 onPressed: () {
@@ -157,8 +160,12 @@ class _ChildState extends State<Child> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => WelcomeFrame()));
                 },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.pink, // background
+                style: TextButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                  backgroundColor: Colors.pink,
+                  primary: Colors.white,
                 ),
                 child: Text('Log Out'),
               ),

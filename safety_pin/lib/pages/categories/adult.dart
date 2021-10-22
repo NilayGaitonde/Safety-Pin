@@ -30,23 +30,25 @@ class Adult extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Hello,',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
+                    Center(
+                      child: Text(
+                        'Hello,',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
-                    Text(
-                      '${UserSimplePreferences.getName()}',
-                      style: TextStyle(fontSize: 25),
+                    Center(
+                      child: Text(
+                        '${UserSimplePreferences.getName()}',
+                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      ),
                     ),
                   ],
                 ),
                 decoration: BoxDecoration(color: Colors.pink),
               )),
+          SizedBox(height: 30),
           Container(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
             child: ListTile(
               trailing: Icon(
                 Icons.login,
@@ -64,28 +66,48 @@ class Adult extends StatelessWidget {
               },
             ),
           ),
-          ListTile(
-            title: const Text(
-              'Edit Contacts List',
-              style: TextStyle(fontSize: 15),
+          Container(
+            padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: ListTile(
+              trailing: Icon(
+                Icons.contacts,
+                color: Colors.pink,
+                size: 30.0,
+              ),
+              title: Center(
+                child: const Text(
+                  'Edit Contacts List',
+                  style: TextStyle(fontSize: 20, color: Colors.blueGrey),
+                ),
+              ),
+              onTap: () {
+                print('Hello world tap');
+                DialogHelper.contactedit(context);
+              },
             ),
-            onTap: () {
-              print('Hello world tap');
-              DialogHelper.contactedit(context);
-            },
           ),
-          ListTile(
-            title: const Text(
-              'Call help',
-              style: TextStyle(fontSize: 15),
+          Container(
+            padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+            child: ListTile(
+              trailing: Icon(
+                Icons.call,
+                color: Colors.pink,
+                size: 30.0,
+              ),
+              title: Center(
+                child: const Text(
+                  'Call help',
+                  style: TextStyle(fontSize: 20, color: Colors.blueGrey),
+                ),
+              ),
+              onTap: () async {
+                print('Help tap');
+                await UrlLauncher.launch('tel: +91 9987207322');
+              },
             ),
-            onTap: () async {
-              print('Help tap');
-              await UrlLauncher.launch('tel: +91 9987207322');
-            },
           ),
           SizedBox(
-            height: 523,
+            height: 480,
           ),
           Container(
             child: ElevatedButton(
@@ -94,10 +116,17 @@ class Adult extends StatelessWidget {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => WelcomeFrame()));
               },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.pink, // background
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                backgroundColor: Colors.pink,
+                primary: Colors.white,
               ),
-              child: Text('Log Out'),
+              child: Text(
+                'Log Out',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
           ),
         ],

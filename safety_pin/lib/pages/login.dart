@@ -43,15 +43,15 @@ class _LoginFormState extends State<LoginForm> {
                                   fontSize: 60,
                                   // fontWeight: FontWeight.bold,
                                   color: Colors.grey[800]))),
+                      // Container(
+                      //     padding: EdgeInsets.fromLTRB(30.0, 87.0, 0.0, 0.0),
+                      //     child: Text('There',
+                      //         style: TextStyle(
+                      //             fontSize: 60,
+                      //             // fontWeight: FontWeight.bold,
+                      //             color: Colors.grey[800]))),
                       Container(
-                          padding: EdgeInsets.fromLTRB(30.0, 87.0, 0.0, 0.0),
-                          child: Text('There',
-                              style: TextStyle(
-                                  fontSize: 60,
-                                  // fontWeight: FontWeight.bold,
-                                  color: Colors.grey[800]))),
-                      Container(
-                          padding: EdgeInsets.fromLTRB(30.0, 140.0, 0.0, 0.0),
+                          padding: EdgeInsets.fromLTRB(30.0, 100.0, 0.0, 0.0),
                           child: Text('$name.',
                               style: TextStyle(
                                   fontSize: 80,

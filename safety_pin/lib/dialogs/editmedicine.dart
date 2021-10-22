@@ -47,98 +47,132 @@ class _EditMedicineState extends State<EditMedicine> {
       height: 372,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(color: Colors.white),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Edit medicine',
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              height: 40,
             ),
-          ),
-          Column(
-            children: [
-              Text(
-                'Medicine name:',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
+            Text(
+              'Edit medicine',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Column(
+              children: [
+                Text(
+                  'Medicine name:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                width: 270,
-                child: TextField(
-                  controller: _titleController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: 270,
+                  child: TextField(
+                    controller: _titleController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              Text(
-                'You will be notified to take ${_titleController.text} everyday at $_hour:$_minutes',
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  final TimeOfDay? _newtime = await showTimePicker(
-                    context: context,
-                    initialTime: _time,
-                  );
-                  if (_newtime != null) {
-                    setState(() {
-                      _time = _newtime;
-                      _hour = _time.hour;
-                      _minutes = _time.minute;
-                    });
-                  }
-                },
-                child: Text(
-                  'Enter time',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Column(
+              children: [
+                Text(
+                  'You will be notified to take ${_titleController.text} everyday at $_hour:$_minutes',
+                  style: TextStyle(fontSize: 11),
                 ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                onPressed: () async {
-                  Database.updateItem(
-                    title: _titleController.text,
-                    time: _time.toString(),
-                    docId: widget.documentID,
-                  );
-                  Navigator.pop(context);
-                },
-                child: Text('Update medicine'),
-              ),
-              ElevatedButton.icon(
+                SizedBox(
+                  height: 50,
+                ),
+                ElevatedButton(
                   onPressed: () async {
-                    Database.deleteItem(docId: widget.documentID);
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => Medicine()),
-                      (Route<dynamic> route) => false,
+                    final TimeOfDay? _newtime = await showTimePicker(
+                      context: context,
+                      initialTime: _time,
                     );
+                    if (_newtime != null) {
+                      setState(() {
+                        _time = _newtime;
+                        _hour = _time.hour;
+                        _minutes = _time.minute;
+                      });
+                    }
                   },
-                  icon: Icon(Icons.delete),
-                  label: Text(''))
-            ],
-          )
-        ],
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                    backgroundColor: Colors.pink,
+                    primary: Colors.white,
+                  ),
+                  child: Text(
+                    'Enter time',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    Database.updateItem(
+                      title: _titleController.text,
+                      time: _time.toString(),
+                      docId: widget.documentID,
+                    );
+                    Navigator.pop(context);
+                  },
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                    backgroundColor: Colors.pink,
+                    primary: Colors.white,
+                  ),
+                  child: Text('Update medicine'),
+                ),
+                ElevatedButton.icon(
+                    style: TextButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
+                      // padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                      backgroundColor: Colors.pink,
+                      primary: Colors.white,
+                    ),
+                    onPressed: () async {
+                      Database.deleteItem(docId: widget.documentID);
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => Medicine()),
+                        (Route<dynamic> route) => false,
+                      );
+                    },
+                    icon: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 5, 0, 5),
+                      child: Icon(Icons.delete),
+                    ),
+                    label: Text(''))
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

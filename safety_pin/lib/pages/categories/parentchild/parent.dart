@@ -54,6 +54,7 @@ class _ParentState extends State<Parent> {
                 decoration: BoxDecoration(color: Colors.pink),
               ),
             ),
+            SizedBox(height: 30),
             Container(
               padding: EdgeInsets.all(10),
               child: ListTile(
@@ -129,6 +130,9 @@ class _ParentState extends State<Parent> {
                 },
               ),
             ),
+            SizedBox(
+              height: 350,
+            ),
             Container(
               child: ElevatedButton(
                 onPressed: () {
@@ -136,8 +140,12 @@ class _ParentState extends State<Parent> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => WelcomeFrame()));
                 },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.pink, // background
+                style: TextButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                  backgroundColor: Colors.pink,
+                  primary: Colors.white,
                 ),
                 child: Text('Log Out'),
               ),

@@ -29,39 +29,61 @@ class _GetDeviceIDState extends State<GetDeviceID> {
       height: 370,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(color: Colors.white),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Column(
-            children: [
-              Text(
-                'Enter device ID:',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
-              ),
-              SizedBox(height: 10),
-              Container(
-                width: 270,
-                child: TextField(
-                  controller: _deviceID,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12))),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Column(
+              children: [
+                SizedBox(
+                  height: 30,
                 ),
-              ),
-            ],
-          ),
-          ElevatedButton(
-              onPressed: () {
-                UserSimplePreferences.saveDeviceID(_deviceID.text);
-                Navigator.pop(context);
-              },
-              child: Text('Done')),
-          ElevatedButton(
-              onPressed: () {
-                DialogHelper.showHelp(context);
-              },
-              child: Text('IDK what I am doing'))
-        ],
+                Text(
+                  'Enter device ID:',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                ),
+                SizedBox(height: 10),
+                Container(
+                  width: 270,
+                  child: TextField(
+                    controller: _deviceID,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12))),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 70,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  UserSimplePreferences.saveDeviceID(_deviceID.text);
+                  Navigator.pop(context);
+                },
+                style: TextButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                  backgroundColor: Colors.pink,
+                  primary: Colors.white,
+                ),
+                child: Text('Done')),
+            ElevatedButton(
+                onPressed: () {
+                  DialogHelper.showHelp(context);
+                },
+                style: TextButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                  backgroundColor: Colors.pink,
+                  primary: Colors.white,
+                ),
+                child: Text('IDK what I am doing'))
+          ],
+        ),
       ),
     );
   }
