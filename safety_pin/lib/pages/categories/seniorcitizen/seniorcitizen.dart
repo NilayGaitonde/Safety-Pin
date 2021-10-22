@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:safety_pin/helpers/dialogHelper.dart';
 import 'package:safety_pin/pages/Welcome.dart';
@@ -104,6 +106,9 @@ class SeniorCitizen extends StatelessWidget {
                 },
               ),
             ),
+            SizedBox(
+              height: 430,
+            ),
             Container(
               child: ElevatedButton(
                 onPressed: () {
@@ -111,8 +116,12 @@ class SeniorCitizen extends StatelessWidget {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => WelcomeFrame()));
                 },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.pink, // background
+                style: TextButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                  backgroundColor: Colors.pink,
+                  primary: Colors.white,
                 ),
                 child: Text('Log Out'),
               ),

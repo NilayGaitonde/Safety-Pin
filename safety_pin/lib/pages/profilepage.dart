@@ -13,6 +13,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.pink,
           title: Text('PROFILE PAGE'),
           centerTitle: true,
         ),
@@ -30,16 +31,21 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget buildName() => Column(
         children: [
+          SizedBox(height: 30),
+          Container(
+            child: new Image.asset('assets/fox.png'),
+          ),
           Text(
             UserSimplePreferences.getName()!,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
           ),
+          SizedBox(height: 30),
           const SizedBox(
             height: 4,
           ),
           Text(
             UserSimplePreferences.getPhone()!,
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(color: Colors.grey, fontSize: 20),
           ),
           Text(
             UserSimplePreferences.getEmail()!,

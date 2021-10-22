@@ -19,15 +19,15 @@ class _ChildParentSetupState extends State<ChildParentSetup> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          padding: EdgeInsets.only(left: 12, top: 250, right: 12),
+          padding: EdgeInsets.only(left: 12, top: 170, right: 12),
           child: Column(
             children: [
               Text(
                 'Are you a parent or are you setting this phone for your child?',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15),
+                style: TextStyle(fontSize: 25),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 150),
               ListTile(
                 title: const Text('I am setting this up for my child'),
                 leading: Radio(
@@ -38,6 +38,7 @@ class _ChildParentSetupState extends State<ChildParentSetup> {
                       _age = value;
                     });
                   },
+                  activeColor: Colors.pink,
                 ),
               ),
               SizedBox(height: 10),
@@ -51,9 +52,10 @@ class _ChildParentSetupState extends State<ChildParentSetup> {
                       _age = value;
                     });
                   },
+                  activeColor: Colors.pink,
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 140),
               ElevatedButton(
                   onPressed: () {
                     UserSimplePreferences.parentChild(_age.toString());
@@ -62,7 +64,18 @@ class _ChildParentSetupState extends State<ChildParentSetup> {
                     else
                       Navigator.of(context).pushNamed('/Games');
                   },
-                  child: Text("Let's get started"))
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 130),
+                    backgroundColor: Colors.pink,
+                    primary: Colors.white,
+                  ),
+                  child: Text(
+                    "start",
+                    style: TextStyle(fontSize: 18),
+                  ))
             ],
           ),
         ),

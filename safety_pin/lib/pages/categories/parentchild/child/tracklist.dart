@@ -16,6 +16,7 @@ class _TrackListState extends State<TrackList> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Track request history"),
+        backgroundColor: Colors.pink,
       ),
       body: historyList(context),
     );
@@ -45,7 +46,7 @@ class _TrackListState extends State<TrackList> {
                   String docID = snapshot.data!.docs[index].id;
                   return Ink(
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: Colors.pink,
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: ListTile(
@@ -69,7 +70,7 @@ class _TrackListState extends State<TrackList> {
           }
           return Center(
               child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
           ));
         });
   }

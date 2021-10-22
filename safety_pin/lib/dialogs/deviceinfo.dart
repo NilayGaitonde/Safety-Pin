@@ -21,23 +21,42 @@ class DeviceInfo extends StatelessWidget {
       height: 200,
       width: 100,
       decoration: BoxDecoration(color: Colors.white),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Text('Device ID:${Device.deviceId}'),
-          ElevatedButton(
-            onPressed: () async {
-              await Clipboard.setData(ClipboardData(text: Device.deviceId));
-            },
-            child: Text('Copy the device id'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text('Got it!'),
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(
+              height: 50,
+            ),
+            Text('Device ID:${Device.deviceId}'),
+            ElevatedButton(
+              onPressed: () async {
+                await Clipboard.setData(ClipboardData(text: Device.deviceId));
+              },
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                backgroundColor: Colors.pink,
+                primary: Colors.white,
+              ),
+              child: Text('Copy the device id'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                backgroundColor: Colors.pink,
+                primary: Colors.white,
+              ),
+              child: Text('Got it!'),
+            ),
+          ],
+        ),
       ),
     );
   }

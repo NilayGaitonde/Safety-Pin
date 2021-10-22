@@ -16,11 +16,13 @@ class _MedicineState extends State<Medicine> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.pink,
         title: Text("Your medicines"),
       ),
       body: medicineList(context),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
+        backgroundColor: Colors.pink,
         onPressed: () {
           DialogHelper.addmedicine(context);
         },
@@ -49,7 +51,7 @@ class _MedicineState extends State<Medicine> {
 
                   return Ink(
                     decoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: Colors.pink[50],
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: ListTile(
@@ -74,7 +76,7 @@ class _MedicineState extends State<Medicine> {
           }
           return Center(
               child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
           ));
         });
   }

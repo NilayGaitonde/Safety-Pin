@@ -26,78 +26,111 @@ class _AddMedicineState extends State<AddMedicine> {
   _buildChild(BuildContext context, NotificationManager manager) {
     print('Adding medicine dialog');
     return Container(
-      height: 372,
+      height: 400,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(color: Colors.white),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'Add medicine',
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              height: 50,
             ),
-          ),
-          Column(
-            children: [
-              Text(
-                'Enter medicine name',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+            Text(
+              'Add medicine',
+              style: TextStyle(
+                color: Colors.pink,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                width: 270,
-                child: TextField(
-                  controller: _medicine,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12))),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Column(
+              children: [
+                Text(
+                  'Enter medicine name',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16.0,
+                      color: Colors.pink[500]),
                 ),
-              ),
-            ],
-          ),
-          Column(
-            children: [
-              Text(
-                'You will be notified to take ${_medicine.text} everyday at ${_time.hour}:${_time.minute}',
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  final TimeOfDay? _newtime = await showTimePicker(
-                    context: context,
-                    initialTime: _time,
-                  );
-                  if (_newtime != null) {
-                    setState(() {
-                      _time = _newtime;
-                    });
-                  }
-                },
-                child: Text(
-                  'Enter time',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                SizedBox(
+                  height: 10,
                 ),
+                Container(
+                  width: 300,
+                  child: TextField(
+                    controller: _medicine,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12))),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Text(
+                  'You will be notified to take ${_medicine.text} everyday at ${_time.hour}:${_time.minute}',
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    final TimeOfDay? _newtime = await showTimePicker(
+                      context: context,
+                      initialTime: _time,
+                    );
+                    if (_newtime != null) {
+                      setState(() {
+                        _time = _newtime;
+                      });
+                    }
+                  },
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                    backgroundColor: Colors.pink,
+                    primary: Colors.white,
+                  ),
+                  child: Text(
+                    'Enter time',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+                  ),
+                ),
+              ],
+            ),
+            ElevatedButton(
+              onPressed: () {
+                print(_medicine.text);
+                print(_time);
+                Database.addItem(name: _medicine.text, time: _time.toString());
+                manager.showNotificationDaily(
+                    _medicine.text, _time.hour, _time.minute);
+                Navigator.pop(context);
+              },
+              style: TextButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30)),
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                backgroundColor: Colors.pink,
+                primary: Colors.white,
               ),
-            ],
-          ),
-          ElevatedButton(
-            onPressed: () {
-              print(_medicine.text);
-              print(_time);
-              Database.addItem(name: _medicine.text, time: _time.toString());
-              manager.showNotificationDaily(
-                  _medicine.text, _time.hour, _time.minute);
-              Navigator.pop(context);
-            },
-            child: Text('Add Medicine'),
-          ),
-        ],
+              child: Text('Add Medicine',
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
+            ),
+            SizedBox()
+          ],
+        ),
       ),
     );
   }
