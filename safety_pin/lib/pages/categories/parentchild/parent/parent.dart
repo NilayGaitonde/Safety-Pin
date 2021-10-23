@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:safety_pin/helpers/dialogHelper.dart';
 import 'package:safety_pin/helpers/firebaseHelper.dart';
 import 'package:safety_pin/pages/Welcome.dart';
+import 'package:safety_pin/pages/categories/parentchild/parent/locationList.dart';
 import 'package:safety_pin/pages/categories/seniorcitizen/medicine/medicine.dart';
 import 'package:safety_pin/pages/home.dart';
 import 'package:safety_pin/pages/profilepage.dart';
@@ -127,6 +128,27 @@ class _ParentState extends State<Parent> {
                 ),
                 onTap: () async {
                   await trackrequest();
+                },
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+              child: ListTile(
+                trailing: Icon(
+                  Icons.location_history_rounded,
+                  size: 30.0,
+                  color: Colors.pink,
+                ),
+                title: Center(
+                  child: const Text(
+                    'Track list',
+                    style: TextStyle(fontSize: 20, color: Colors.blueGrey),
+                  ),
+                ),
+                onTap: () {
+                  print('TRACK LIST');
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LocationList()));
                 },
               ),
             ),

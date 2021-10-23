@@ -1,30 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
+import 'package:safety_pin/helpers/dialogHelper.dart';
 import 'package:safety_pin/helpers/firebaseHelper.dart';
 import 'package:safety_pin/services/store.dart';
 
-class TrackList extends StatefulWidget {
-  const TrackList({Key? key}) : super(key: key);
+class LocationList extends StatefulWidget {
+  const LocationList({Key? key}) : super(key: key);
 
   @override
-  _TrackListState createState() => _TrackListState();
+  _LocationListState createState() => _LocationListState();
 }
 
-class _TrackListState extends State<TrackList> {
+class _LocationListState extends State<LocationList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Track request history"),
+        title: Text("Location history of your child"),
         backgroundColor: Colors.pink,
+        centerTitle: true,
       ),
-      body: historyList(context),
+      body: locationList(context),
     );
   }
 
-  Widget historyList(BuildContext context) {
-    var docIDs = List<String>.empty(growable: true);
-    print('History list');
+  Widget locationList(BuildContext context) {
+    print('Location history list');
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: ParentChild.readItems(),
         builder: (context, snapshot) {
@@ -42,12 +45,8 @@ class _TrackListState extends State<TrackList> {
                   var requestInfo = snapshot.data!.docs[index].data();
                   print('Title:$requestInfo');
                   print(requestInfo.runtimeType);
-                  String time = requestInfo['time'];
-                  String address = requestInfo['Address'];
+                  String childAddress = requestInfo['Child address'];
                   String docID = snapshot.data!.docs[index].id;
-                  docIDs.add(docID.toString());
-                  UserSimplePreferences.saveDOC(docIDs);
-                  print('DOC IDS:$docIDs');
                   return Ink(
                     decoration: BoxDecoration(
                       color: Colors.pink[50],
@@ -59,12 +58,7 @@ class _TrackListState extends State<TrackList> {
                       ),
                       onTap: () => onoff(context),
                       title: Text(
-                        time,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      subtitle: Text(
-                        address,
+                        childAddress,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -81,12 +75,30 @@ class _TrackListState extends State<TrackList> {
 
   onoff(BuildContext context) {
     final scaffold = ScaffoldMessenger.of(context);
-    scaffold.showSnackBar(
-      SnackBar(
-        content: const Text(
-          "If this doesn't look like someplace your parent/gaurdian is or has been in the past we request you too kindly turn off your location sharing feature",
-        ),
-      ),
-    );
+    scaffold.showSnackBar(SnackBar(
+      content: const Text(
+          "This seems to be the last known location of your child's device"),
+    ));
+  }
+
+  Future<void> trackrequest() async {
+    Position parent = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    if (UserSimplePreferences.checkDeviceID()) {
+      UserSimplePreferences.trackCount();
+      int counter = UserSimplePreferences.getCount()!;
+      print('Track requested\n$counter');
+      String time = DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
+      ParentChild.initial(
+        time: time,
+        latitude: parent.latitude.toString(),
+        longitude: parent.longitude.toString(),
+        childDevID: UserSimplePreferences.getDeviceID()!,
+        request: true,
+        response: false,
+      );
+    } else {
+      DialogHelper.getDeviceId(context);
+    }
   }
 }

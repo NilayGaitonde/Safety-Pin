@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:geolocator/geolocator.dart';
+import 'package:safety_pin/helpers/firebaseHelper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:device_info/device_info.dart';
 
@@ -58,6 +59,9 @@ class UserSimplePreferences {
     }
   }
 
+  static Future location(bool share) async =>
+      await _preferences.setBool('ShareLocation', share);
+
   static Future saveName(String name) async =>
       await _preferences.setString('Name', name);
 
@@ -66,6 +70,8 @@ class UserSimplePreferences {
 
   static Future savePhone(String phoneNumber) async =>
       await _preferences.setString('number', phoneNumber);
+  static Future saveDOC(List<String> docIDs) async =>
+      await _preferences.setStringList('DocIDs', docIDs);
 
   static void saveDeviceID(String deviceID) async =>
       await _preferences.setString('DeviceID', deviceID);
@@ -79,4 +85,26 @@ class UserSimplePreferences {
   static int? getCount() => _preferences.getInt('Counter');
   static String? getParentChild() => _preferences.getString('Age');
   static String? getDeviceID() => _preferences.getString('DeviceID');
+  static bool? getLocation() => _preferences.getBool('ShareLocation');
+  static List<String>? getDocIDs() => _preferences.getStringList('DocIDs');
+
+  static sendLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    if (UserSimplePreferences.getLocation() == null) {
+      print('We think it is null');
+    } else if (UserSimplePreferences.getLocation()!) {
+      print('Hello');
+      List<String> docIDs = UserSimplePreferences.getDocIDs()!;
+      docIDs.forEach((docId) {
+        ParentChild.sendLocation(
+            childDevId: Device.deviceId,
+            latitude: position.latitude.toString(),
+            longitude: position.longitude.toString(),
+            docId: docId);
+      });
+    } else {
+      print(UserSimplePreferences.getLocation()!);
+    }
+  }
 }

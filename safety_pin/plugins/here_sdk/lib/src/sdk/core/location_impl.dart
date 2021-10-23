@@ -79,7 +79,8 @@ class Location {
   ///
   /// Both the [coordinates] and [timestamp] parameters are mandatory. The rest
   /// can be passed as named parameters and will be initialized to null if not provided.
-  @Deprecated("Will be removed in v4.11.0. Use [Location.withCoordinates] instead.")
+  @Deprecated(
+      "Will be removed in v4.11.0. Use [Location.withCoordinates] instead.")
   factory Location.withAllFields(coordinates, timestamp,
           {double? bearingInDegrees,
           double? speedInMetersPerSecond,
@@ -104,8 +105,11 @@ class Location {
   ///
   /// Both the [coordinates] and [timestamp] parameters are mandatory.
   /// The rest of the fields will be initialized to null.
-  @Deprecated("Will be removed in v4.11.0. Use [Location.withCoordinates] instead.")
-  factory Location.withDefaults(GeoCoordinates coordinates, DateTime timestamp) => $prototype.$init(
+  @Deprecated(
+      "Will be removed in v4.11.0. Use [Location.withCoordinates] instead.")
+  factory Location.withDefaults(
+          GeoCoordinates coordinates, DateTime timestamp) =>
+      $prototype.$init(
         coordinates,
         timestamp,
         timestamp,
@@ -122,7 +126,8 @@ class Location {
   /// The [coordinates] parameter is mandatory.
   /// The timestamp is initialized to 0.
   /// The rest of the fields will be initialized to null.
-  factory Location.withCoordinates(GeoCoordinates coordinates) => $prototype.$init(
+  factory Location.withCoordinates(GeoCoordinates coordinates) =>
+      $prototype.$init(
         coordinates,
         DateTime.utc(0),
         null,
@@ -147,8 +152,10 @@ class Location {
         horizontalAccuracyInMeters == _other.horizontalAccuracyInMeters &&
         verticalAccuracyInMeters == _other.verticalAccuracyInMeters &&
         bearingAccuracyInDegrees == _other.bearingAccuracyInDegrees &&
-        speedAccuracyInMetersPerSecond == _other.speedAccuracyInMetersPerSecond &&
-        timestampSinceBootInMilliseconds == _other.timestampSinceBootInMilliseconds;
+        speedAccuracyInMetersPerSecond ==
+            _other.speedAccuracyInMetersPerSecond &&
+        timestampSinceBootInMilliseconds ==
+            _other.timestampSinceBootInMilliseconds;
   }
 
   @override

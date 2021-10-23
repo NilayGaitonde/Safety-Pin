@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.safety_pin">
     <!-- android:installLocation="preferExternal"  -->
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -9,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <application
+        tools:replace="android:label"
         android:label="safety_pin"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.here.sdk.access_key_id" android:value="gf38-TjzNepPJ98XDgzjkQ"/>

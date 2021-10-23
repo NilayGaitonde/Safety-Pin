@@ -98,6 +98,7 @@ class ParentChild {
       "request": request,
       "response": response,
       "Address": address,
+      "Child address": "none",
     };
     await documentReference
         .set(data)
@@ -138,5 +139,43 @@ class ParentChild {
     CollectionReference<Map<String, dynamic>> notesItemCollection =
         _trackcollection.doc(userUid).collection(devId);
     return notesItemCollection.snapshots();
+  }
+
+  static updateResponse({
+    required String childDevId,
+    required bool response,
+    required String docId,
+  }) async {
+    DocumentReference documentReference =
+        _trackcollection.doc(userUid).collection(childDevId).doc(docId);
+    Map<String, dynamic> data = <String, dynamic>{
+      "response": response,
+    };
+    await documentReference
+        .update(data)
+        .whenComplete(() => print("Response changed in database"))
+        .catchError((e) => print(e));
+  }
+
+  static sendLocation({
+    required String childDevId,
+    required String latitude,
+    required String longitude,
+    required String docId,
+  }) async {
+    var output = await placemarkFromCoordinates(
+        double.parse(latitude), double.parse(longitude));
+    String address = "${output[0].locality},${output[0].subAdministrativeArea}";
+    print(docId);
+    print(output);
+    DocumentReference documentReference =
+        _trackcollection.doc(userUid).collection(childDevId).doc(docId);
+    Map<String, dynamic> data = <String, dynamic>{
+      "Child address": address,
+    };
+    await documentReference
+        .update(data)
+        .whenComplete(() => print("Child location updated"))
+        .catchError((e) => print(e));
   }
 }

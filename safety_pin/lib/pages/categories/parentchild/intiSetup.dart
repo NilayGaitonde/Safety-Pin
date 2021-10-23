@@ -12,7 +12,6 @@ class ChildParentSetup extends StatefulWidget {
 
 class _ChildParentSetupState extends State<ChildParentSetup> {
   Age? _age = Age.parent;
-  String parentChild = UserSimplePreferences.getParentChild()!;
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +57,13 @@ class _ChildParentSetupState extends State<ChildParentSetup> {
               SizedBox(height: 140),
               ElevatedButton(
                   onPressed: () {
-                    UserSimplePreferences.parentChild(_age.toString());
-                    if (_age.toString() == 'Age.parent')
+                    if (_age.toString() == 'Age.parent') {
+                      UserSimplePreferences.parentChild('Parent');
                       Navigator.of(context).pushNamed('/Parent');
-                    else
+                    } else {
+                      UserSimplePreferences.parentChild('Child');
                       Navigator.of(context).pushNamed('/Games');
+                    }
                   },
                   style: TextButton.styleFrom(
                     shape: RoundedRectangleBorder(

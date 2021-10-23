@@ -64,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
         padding: const EdgeInsets.fromLTRB(100.0, 20.0, 100.0, 20.0),
         child: Text(
           number,
-          style: TextStyle(fontSize: 28.0, color: Colors.white),
+          style: TextStyle(fontSize: 25.0, color: Colors.white),
         ),
       ),
     );

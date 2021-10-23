@@ -6,7 +6,7 @@ import 'package:here_sdk/core.dart';
 import 'package:safety_pin/pages/bothpages.dart';
 import 'package:safety_pin/pages/categories/adult.dart';
 import 'package:safety_pin/pages/categories/parentchild/child/child.dart';
-import 'package:safety_pin/pages/categories/parentchild/parent.dart';
+import 'package:safety_pin/pages/categories/parentchild/parent/parent.dart';
 import 'package:safety_pin/pages/setup.dart';
 import 'package:safety_pin/services/store.dart';
 import 'package:shared_preferences/shared_preferences.dart';

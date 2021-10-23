@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safety_pin/helpers/dialogHelper.dart';
+import 'package:safety_pin/helpers/firebaseHelper.dart';
 import 'package:safety_pin/pages/Welcome.dart';
 import 'package:safety_pin/pages/categories/parentchild/child/tracklist.dart';
 import 'package:safety_pin/pages/home.dart';
@@ -147,7 +148,6 @@ class _ChildState extends State<Child> {
               child: Switch(
                 onChanged: (newVal) {
                   onSwitchValueChanged(newVal);
-                  
                 },
                 value: switchLocation,
               ),
@@ -179,6 +179,19 @@ class _ChildState extends State<Child> {
   void onSwitchValueChanged(bool newVal) {
     setState(() {
       switchLocation = newVal;
+    });
+    UserSimplePreferences.location(newVal);
+    print(UserSimplePreferences.getLocation());
+    update(newVal);
+    UserSimplePreferences.sendLocation();
+  }
+
+  void update(newVal) {
+    print(UserSimplePreferences.getDocIDs()!);
+    List<String> docIDs = UserSimplePreferences.getDocIDs()!;
+    docIDs.forEach((docId) {
+      ParentChild.updateResponse(
+          childDevId: Device.deviceId, response: newVal, docId: docId);
     });
   }
 }
