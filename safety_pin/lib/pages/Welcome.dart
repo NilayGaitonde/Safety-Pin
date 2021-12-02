@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:safety_pin/pages/Controller/welcome_controller.dart';
+import 'package:safety_pin/helpers/welcome_controller.dart';
 import 'package:safety_pin/pages/login.dart';
 
 class WelcomeFrame extends StatelessWidget {

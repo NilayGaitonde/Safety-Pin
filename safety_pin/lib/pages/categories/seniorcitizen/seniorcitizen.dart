@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:safety_pin/helpers/dialogHelper.dart';
 import 'package:safety_pin/pages/Welcome.dart';

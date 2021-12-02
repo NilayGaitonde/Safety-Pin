@@ -4,7 +4,7 @@ import 'package:safety_pin/pages/categories/seniorcitizen/seniorcitizen.dart';
 import 'package:safety_pin/pages/home.dart';
 import 'package:safety_pin/pages/landingpage.dart';
 import 'package:safety_pin/services/store.dart';
-import 'categories/parentchild/intiSetup.dart';
+import 'categories/parentchild/initSetup.dart';
 
 class BothPages extends StatelessWidget {
   const BothPages({Key? key}) : super(key: key);

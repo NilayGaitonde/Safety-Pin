@@ -1,7 +1,13 @@
 import 'package:flutter/cupertino.dart';
-import 'package:safety_pin/pages/model/info.dart';
 import 'package:get/state_manager.dart';
 import 'package:get/utils.dart';
+
+class WelcomeInfo {
+  final imageasset;
+  final title;
+  final desc;
+  WelcomeInfo(this.imageasset, this.title, this.desc);
+}
 
 class WelcomeController extends GetxController {
   var SelectedPageIndex = 0.obs;
