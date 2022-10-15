@@ -12,5 +12,5 @@ Since this project is still in it's development phase we do not have an app that
 > [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) the project to your PC.<br/>
 > Connect a Android Emulator or an actual phone to [run the app].<br/>(https://flutter.dev/docs/get-started/test-drive?tab=androidstudio)
 
-#Working
+# Working
 Here's a video that shows the working of the application https://drive.google.com/file/d/1REjOI53dJoNz4b4q-eEJDUcUTykcME7T/view?usp=sharing
